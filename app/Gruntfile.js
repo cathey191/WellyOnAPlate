@@ -1,15 +1,48 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   grunt.initConfig({
-    watch: {
-      scripts: {
-        files: ['**/*.js'],
-        tasks: ['jshint'],
-        options: {
-          spawn: false,
-        },
-      },
+    sasslint: {
+      target: 'public/sass/*.scss'
     },
+    sass: {
+      dist: {
+        options: {
+          style: 'expand'
+        },
+        files: {
+          'public/css/style.css': 'public/sass/style.scss'
+        }
+      }
+    },
+    cssmin: {
+      target: {
+        files: [
+          {
+            expand: true,
+            cwd: 'public/css',
+            src: ['*.css', '!*.min.css'],
+            dest: 'public/css',
+            ext: '.min.css'
+          }
+        ]
+      }
+    },
+    watch: {
+      sass: {
+        files: ['public/**/*.scss'],
+        tasks: ['sasslint', 'sass']
+      },
+      css: {
+        files: ['public/**/*.css'],
+        tasks: ['cssmin']
+      }
+    }
   })
-}
 
-grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-contrib-sass')
+  grunt.loadNpmTasks('grunt-sass-lint')
+  grunt.loadNpmTasks('grunt-contrib-cssmin')
+
+  grunt.registerTask('lint', ['sasslint', 'cssmin'])
+  grunt.registerTask('w', ['watch'])
+}
