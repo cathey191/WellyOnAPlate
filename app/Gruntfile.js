@@ -26,6 +26,13 @@ module.exports = function(grunt) {
         ]
       }
     },
+    uglify: {
+      my_target: {
+        files: {
+          'public/js/script.min.js': ['public/js/*.js']
+        }
+      }
+    },
     watch: {
       sass: {
         files: ['public/**/*.scss'],
@@ -42,7 +49,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass')
   grunt.loadNpmTasks('grunt-sass-lint')
   grunt.loadNpmTasks('grunt-contrib-cssmin')
+  grunt.loadNpmTasks('grunt-contrib-uglify')
 
+  grunt.registerTask('minfi', ['cssmin', 'uglify'])
   grunt.registerTask('lint', ['sasslint', 'cssmin'])
   grunt.registerTask('w', ['watch'])
 }
