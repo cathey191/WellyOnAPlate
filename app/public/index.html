@@ -3,18 +3,19 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Wellington On A Plate</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Nunito:300,900,900i" rel="stylesheet">
 		<link rel="stylesheet" href="/css/style.css">
 	</head>
 	<body>
 		<header>
-			<form action="">
-				<input type="radio" name="gender" value="cocktails" checked> Male<br>
-				<input type="radio" name="gender" value="burgers"> Female<br>
-				<input type="radio" name="gender" value="dine"> Other
+			<form class="filter-form" action="">
+				<input class="filter-list" type="radio" name="gender" value="cocktails" checked> Cocktail
+				<input class="filter-list" type="radio" name="gender" value="burgers"> Burger
+				<input class="filter-list" type="radio" name="gender" value="dine"> Dine
 			</form>
 
-			<button value="protein"></button>
-
+			<button class="btn purple-btn" value="protein">Protein</button>
 
 			<select>
 				<option value="alphabetical">Alphabetical</option>
