@@ -16,6 +16,8 @@ app.get('/allProducts', function (req, res) {
   for (var i = 0; i < woap.venues.length; i++) {
     woapData.push(eventData(woap.venues[i]))
     if (woap.venues.length === i + 1) {
+      // res.json(woap)
+      // removeFalse(woapData)
       res.json(removeFalse(woapData))
     }
   }
@@ -34,8 +36,8 @@ function eventData (woapLocations) {
       if (woapLocations.Event[j].platform_cocktail === '1') {
         option.push({ event: 'cocktail', title: woapLocations.Event[j].name_of_cocktail_tapas_match, price: woapLocations.Event[j].price_of_cocktail_tapas_match, description: woapLocations.Event[j].description_of_cocktail_and_regionally_inspired_tapas_match, spirit: woapLocations.Event[j].type_of_spirit })
       }
-      if (woapLocations.Event[j].platform_dine === '1') {
-        option.push({ event: 'dine', total_dishes: woapLocations.Event[j].how_many_additional_courses_will_you_be_serving })
+      if (woapLocations.Event[j].platform_dine === '1' && woapLocations.Event[j].how_many_additional_courses_will_you_be_serving.length === 1) {
+        option.push({ event: 'dine', total_dishes: woapLocations.Event[j].how_many_additional_courses_will_you_be_serving, price: woapLocations.Event[j].price_of_set_menu, dishes: dineData(woapLocations.Event[j]) })
       }
     }
     location.push(option)
@@ -43,6 +45,20 @@ function eventData (woapLocations) {
     return false
   }
   return location
+}
+
+function dineData (data) {
+  var dine = []
+  if (data.how_many_additional_courses_will_you_be_serving === '2') {
+    dine.push({ course1_type: data.course1_option1_type, course1: data.course1_option1 })
+    dine.push({ course2_type: data.course2_option1_type, course2: data.course2_option1 })
+  }
+  if (data.how_many_additional_courses_will_you_be_serving === '3') {
+    dine.push({ course1_type: data.course1_option1_type, course1: data.course1_option1 })
+    dine.push({ course2_type: data.course2_option1_type, course2: data.course2_option1 })
+    dine.push({ course3_type: data.course3_option1_type, course3: data.course3_option1 })
+  }
+  return dine
 }
 
 function removeFalse (array) {
