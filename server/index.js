@@ -25,7 +25,7 @@ function eventData (woapLocations) {
   var location = []
 
   if (woapLocations.Event.length !== 0) {
-    location.push({ address1: woapLocations.Venue.address1, suburb: woapLocations.Venue.suburb, website: woapLocations.Venue.website })
+    location.push({ company: woapLocations.Venue.title, address1: woapLocations.Venue.address1, suburb: woapLocations.Venue.suburb, website: woapLocations.Venue.website })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
       if (woapLocations.Event[j].platform_burger === '1') {
