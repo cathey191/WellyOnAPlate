@@ -1,31 +1,18 @@
 html, body {
-  box-sizing: border-box;
   margin: 0;
-  padding: 0; }
-
-* {
-  font-family: 'Nunito', sans-serif;
-  color: #21237b; }
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
 
 header {
-  height: 100px;
+  margin: 0;
   width: 100%;
-  background-color: #6cabc4;
-  padding: 10px; }
-
-.filter-form {
-  display: flex;
-  justify-content: space-around; }
-
-.filter-list {
-  display: inline; }
-
-.btn {
-  border-radius: 10px;
-  border: none;
-  color: white; }
-
-.purple-btn {
-  background-color: #9c59a6; }
+  position: absolute;
+  right: 0;
+  height: 100px;
+  padding: 10px;
+  background: #6cabc4; }
 
 /*# sourceMappingURL=style.css.map */

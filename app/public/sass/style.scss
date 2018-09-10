@@ -1,42 +1,64 @@
-$dark-blue: #21237b;
+// $dark-blue: #21237b;
 $light-blue: #6cabc4;
-$purple: #9c59a6;
-$green: #1dbc97;
+// $purple: #9c59a6;
+// $green: #1dbc97;
 
 html,
 body {
-	box-sizing: border-box;
+	// box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	// overflow: 
 }
 
-* {
-	font-family: 'Nunito', sans-serif;
-	color: $dark-blue;
-}
 
 header {
-	height: 100px;
+	margin: 0;
 	width: 100%;
-	background-color: $light-blue;
+	position: absolute;
+	right: 0;
+	height: 100px;
 	padding: 10px;
+	background: $light-blue;
 }
 
-.filter-form {
-	display: flex;
-	justify-content: space-around;
-}
+// .header-top {
+// }
 
-.filter-list {
-	display: inline;
-}
 
-.btn {
-	border-radius: 10px;
-	border: none;
-	color: white;
-}
+// .icon {
+// 	width: 25px;
+// 	height: 25px;
+// }
 
-.purple-btn {
-	background-color: $purple;
-}
+// .filter-form {
+// 	// display: flex;
+// 	// justify-content: space-around;
+// 	margin: 0 auto;
+// }
+
+// .filter-list {
+// 	display: inline;
+// 	font-size: 1.3rem;
+// }
+
+// .btn {
+// 	border-radius: 20px;
+// 	border: none;
+// 	color: white;
+// }
+
+// .purple-btn {
+// 	background-color: $purple;
+// 	font-weight: 600;
+// 	font-size: 1.2rem;
+// 	padding: 8px 15px;
+// }
+
+// .sort-by {
+// 	background-color: white;
+// }

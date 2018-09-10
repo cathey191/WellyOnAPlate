@@ -36,12 +36,14 @@ module.exports = function(grunt) {
     watch: {
       sass: {
         files: ['public/**/*.scss'],
-        tasks: ['sasslint', 'sass']
+        tasks: [
+          // 'sasslint', 
+          'sass']
       },
-      css: {
-        files: ['public/**/style.css'],
-        tasks: ['cssmin']
-      }
+      // css: {
+      //   files: ['public/**/style.css'],
+      //   tasks: ['cssmin']
+      // }
     }
   })
 
