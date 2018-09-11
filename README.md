@@ -25,6 +25,8 @@ The server will be run on port 5000
 
 ## Filter Data
 
+Burger
+
 | Burger | Tag |
 | ------ | ------ |
 | All Products | \burger |
@@ -34,7 +36,9 @@ The server will be run on port 5000
 | Vegetarian | \burger\type:Vegetarian |
 | Venison | \burger\type:Venison |
 | Other | \burger\type:Other |
---
+
+Cocktail
+
 | Cocktail | Tag |
 | ------ | ------ |
 | All Products | \cocktail |
@@ -46,7 +50,8 @@ The server will be run on port 5000
 | Whiskey | \cocktail\type:Whiskey |
 | Wine | \cocktail\type:Wine |
 
---
+Dine
+
 | Dine | Tag |
 | ------ | ------ |
 | All Products | \dine |
