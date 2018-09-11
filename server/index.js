@@ -51,6 +51,63 @@ app.get('/cocktail', function (req, res) {
   }
 })
 
+app.get('/dine/type:type', function (req, res) {
+  var type = req.params.type.substring(1)
+  if (type === 'Festival') {
+    type = 'Festival Dish'
+  }
+  var woapData = []
+  for (var i = 0; i < woap.venues.length; i++) {
+    for (var j = 0; j < woap.venues[i].Event.length; j++) {
+      if (woap.venues[i].Event[j].course1_option1_type === type) {
+        woapData.push(getDine(woap.venues[i]))
+        break
+      } else if (woap.venues[i].Event[j].course2_option1_type === type) {
+        woapData.push(getDine(woap.venues[i]))
+        break
+      } else if (woap.venues[i].Event[j].course3_option1_type === type) {
+        woapData.push(getDine(woap.venues[i]))
+        break
+      }
+    }
+    if (woap.venues.length === i + 1) {
+      res.json(removeFalse(woapData))
+    }
+  }
+})
+
+app.get('/burger/type:type', function (req, res) {
+  var type = req.params.type.substring(1)
+  var woapData = []
+  for (var i = 0; i < woap.venues.length; i++) {
+    for (var j = 0; j < woap.venues[i].Event.length; j++) {
+      if (woap.venues[i].Event[j].what_is_the_main_protein_of_your_burger === type) {
+        woapData.push(getBurger(woap.venues[i]))
+        break
+      }
+    }
+    if (woap.venues.length === i + 1) {
+      res.json(removeFalse(woapData))
+    }
+  }
+})
+
+app.get('/cocktail/type:type', function (req, res) {
+  var type = req.params.type.substring(1)
+  var woapData = []
+  for (var i = 0; i < woap.venues.length; i++) {
+    for (var j = 0; j < woap.venues[i].Event.length; j++) {
+      if (woap.venues[i].Event[j].type_of_spirit === type) {
+        woapData.push(getCocktail(woap.venues[i]))
+        break
+      }
+    }
+    if (woap.venues.length === i + 1) {
+      res.json(removeFalse(woapData))
+    }
+  }
+})
+
 function eventData (woapLocations) {
   var location = []
   if (woapLocations.Event.length !== 0) {
