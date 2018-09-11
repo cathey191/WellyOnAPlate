@@ -1,7 +1,11 @@
-// $dark-blue: #21237b;
+$dark-blue: #21237b;
 $light-blue: #6cabc4;
-// $purple: #9c59a6;
-// $green: #1dbc97;
+$purple: #9c59a6;
+$green: #1dbc97;
+
+* {
+	box-sizing: border-box;
+}
 
 html,
 body {
@@ -16,49 +20,55 @@ body {
 }
 
 
-header {
+.header {
 	margin: 0;
 	width: 100%;
 	position: absolute;
 	right: 0;
-	height: 100px;
+	height: 150px;
 	padding: 10px;
 	background: $light-blue;
 }
 
-// .header-top {
-// }
+.header-top {
+}
 
 
-// .icon {
-// 	width: 25px;
-// 	height: 25px;
-// }
+.icon {
+	width: 25px;
+	height: 25px;
+}
 
-// .filter-form {
-// 	// display: flex;
-// 	// justify-content: space-around;
-// 	margin: 0 auto;
-// }
+.filter-form {
+	// display: flex;
+	// justify-content: space-around;
+	margin: 0 auto;
+}
 
-// .filter-list {
-// 	display: inline;
-// 	font-size: 1.3rem;
-// }
+.filter-list {
+	display: inline;
+	font-size: 1.3rem;
+}
 
-// .btn {
-// 	border-radius: 20px;
-// 	border: none;
-// 	color: white;
-// }
+.btn {
+	border-radius: 20px;
+	border: none;
+	color: white;
+}
 
-// .purple-btn {
-// 	background-color: $purple;
-// 	font-weight: 600;
-// 	font-size: 1.2rem;
-// 	padding: 8px 15px;
-// }
+.purple-btn {
+	background-color: $purple;
+	font-weight: 600;
+	font-size: 1.2rem;
+	padding: 8px 15px;
+}
 
-// .sort-by {
-// 	background-color: white;
-// }
+.sort-by {
+	background-color: white;
+}
+
+.test-box {
+	width: 100%;
+	height: 100px;
+	background: red;
+}
