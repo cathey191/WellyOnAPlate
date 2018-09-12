@@ -1,9 +1,21 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ReactDom from 'react-dom'
 
 // Importing Components
 import Header from './header.js'
 import Woapdata from './data.js'
 
-ReactDom.render(<Header />, document.querySelector('#header'))
-ReactDom.render(<Woapdata />, document.querySelector('#list'))
+class App extends Component {
+  render () {
+    return (
+      <div>
+        <Header />
+        <main>
+          <Woapdata />
+        </main>
+      </div>
+    )
+  }
+}
+
+ReactDom.render(<App />, document.querySelector('#header'))

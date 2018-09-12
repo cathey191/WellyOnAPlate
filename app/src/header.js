@@ -26,7 +26,7 @@ class Header extends Component {
           <button className='btn purple-btn' value={this.state.type}>{this.state.type}</button>
           <h3>Sort by</h3>
           <select className='sort-by'>
-            {this.state.sort.map((option) => <option value={option}>{option}</option>)}
+            {this.state.sort.map((option, i) => <option value={option} key={i}>{option}</option>)}
           </select>
         </div>
       </div>

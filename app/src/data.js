@@ -11,7 +11,7 @@ class Woapdata extends Component {
   }
 
   componentDidMount () {
-    fetch('http://192.168.33.10:5000/cocktail')
+    fetch('http://192.168.33.10:5000/' + 'cocktail/type:Rum')
       .then(res => res.json())
       .then(
         result => {
@@ -37,8 +37,13 @@ class Woapdata extends Component {
       return <div>Loading...</div>
     } else {
       return (
-        <div>
-          {this.state.items.map((item) => <p>{item[0].company}</p>)}
+        <div className='list'>
+          {this.state.items.map((item, i) => <div>
+            <h1 className='venue-name'>{item[0].company}<span className='item-cost'>$22</span></h1>
+            <h2 className='item-name'>Buns got soul</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+          </div>
+          )}
         </div>
       )
     }
