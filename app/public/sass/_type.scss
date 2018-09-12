@@ -1,0 +1,39 @@
+@import 'variables';
+
+h1, h2, h3, p, input {
+	font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 26px;
+  color: $purple;
+}
+
+.item-cost {
+  float: right;
+  color: $orange;
+}
+
+h2 {
+  color: $dark-blue;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+h3 {
+  color: $green;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+p {
+  color: $dark-blue;
+  font-weight: 300;
+}
+
+.venue-address {
+  font-size: 14px;
+}

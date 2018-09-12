@@ -1,30 +1,21 @@
-$dark-blue: #21237b;
-$light-blue: #6cabc4;
-$purple: #9c59a6;
-$green: #1dbc97;
+@import 'variables';
+@import 'type';
 
+
+
+// ****** SECTIONS & LAYOUT ******
 * {
 	box-sizing: border-box;
-
 }
-
-h1, h2, h3, p, input {
-	font-family: 'Nunito', sans-serif;
-}
-
 html,
 body {
-	// box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	// overflow: 
 }
-
-
 .header {
 	margin: 0;
 	width: 100%;
@@ -34,23 +25,23 @@ body {
 	padding: 10px;
 	background: $light-blue;
 }
-
-.header-top {
-}
-
 .header-bottom {
 	max-width: 300px;
 	margin: 15px auto;
 	display: flex;
 	justify-content: space-between;
 }
-
-
-.icon {
-	width: 25px;
-	height: 25px;
+main {
+	padding: 140px 20px 0px 20px;
 }
+// ****** SECTIONS & LAYOUT END ******
 
+
+
+
+
+
+// ****** HEADER OBJECTS ******
 .filter-form {
 	max-width: 300px;
 	margin: 0 auto;
@@ -61,10 +52,26 @@ body {
 	font-size: 1.3rem;
 }
 
+.sort-by {
+	background-color: white;
+}
+// ****** HEADER OBJECTS END ******
+
+// ****** BUTTONS ******
 .btn {
 	border-radius: 20px;
 	border: none;
 	color: white;
+	font-size: 16px;
+}
+
+.btn-visit {
+	background-color: $green;
+	text-transform: uppercase;
+	padding: 10px 18px;
+	font-weight: 700;
+	float: right;
+	font-size: 14px;
 }
 
 .purple-btn {
@@ -73,17 +80,37 @@ body {
 	font-size: 1.2rem;
 	padding: 8px 15px;
 }
+// ****** BUTTONS END ******
 
-.sort-by {
-	background-color: white;
+
+
+
+
+.list-bottom {
+	margin-top: 15px;
+}
+.list-bottom::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+.list-break {
+	height: 6px;
+	border: none;
+	background: #6cabc4;
 }
 
-.test-box {
-	width: 100%;
-	height: 100px;
-	background: red;
+.venue-info {
+	float: left;
 }
 
-main {
-	padding-top: 130px;
+.icon {
+	width: 25px;
+	height: 25px;
+}
+
+.icon-small {
+	width: 15px;
+	height: 15px;
+	margin-right: 4px;
 }
