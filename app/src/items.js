@@ -3,6 +3,9 @@ import ReactDom from 'react-dom'
 
 import Woapdata from './data.js'
 
+console.dir(this.props.allItems);
+
+
 class Items extends Component {
     constructor(props) {
         super(props);

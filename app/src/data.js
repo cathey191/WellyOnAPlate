@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Items from './items.js'
 
 class Woapdata extends Component {
   constructor (props) {
@@ -38,7 +39,8 @@ class Woapdata extends Component {
     } else {
       return (
         <div>
-          {this.state.items.map((item) => <p>{item[0].company}</p>)}
+          <Items allItems={this.state.items}></Items>
+          {/* {this.state.items.map((item) => <p>{item[0].company}</p>)} */}
         </div>
       )
     }
