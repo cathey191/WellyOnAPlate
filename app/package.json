@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
     "react-scripts": "1.1.5"
   },
   "scripts": {
@@ -19,6 +17,8 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-sass-lint": "^0.2.4"
+    "grunt-sass-lint": "^0.2.4",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0"
   }
 }
