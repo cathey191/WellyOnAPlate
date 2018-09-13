@@ -12,7 +12,7 @@ class Woapdata extends React.Component {
   }
 
   componentDidMount () {
-    fetch('http://192.168.33.10:5000/cocktail')
+    fetch('http://192.168.33.10:5000/dine')
       .then(res => res.json())
       .then(
         result => {
