@@ -11,8 +11,27 @@ class Woapdata extends React.Component {
     }
   }
 
-  componentDidMount () {
-    fetch('http://192.168.33.10:5000/dine')
+  componentWillMount () {
+    fetch('http://192.168.33.10:5000/burger')
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            isLoaded: true,
+            items: result
+          })
+        },
+        error => {
+          this.setState({
+            isLoaded: true,
+            error
+          })
+        }
+      )
+  }
+
+  componentWillReceiveProps (nextProps) {
+    fetch('http://192.168.33.10:5000/' + nextProps.current)
       .then(res => res.json())
       .then(
         result => {
@@ -31,7 +50,7 @@ class Woapdata extends React.Component {
   }
 
   render () {
-    const { error, isLoaded, items } = this.state
+    const { error, isLoaded } = this.state
     if (error) {
       return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
