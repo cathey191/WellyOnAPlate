@@ -17,10 +17,10 @@ class Items extends Component {
     }
 
     render() {
-        if (this.state.items[0][1][0].event == 'burger') {
+        if (this.props.allItems[0][1][0].event == 'burger' || this.props.allItems[0][1][0].event == 'cocktail') {
             return (
                 <div>
-                    {this.state.items.map((item, i) =>
+                    {this.props.allItems.map((item, i) =>
                         <div key={i}>
                             <div className='list-item'>
                                 <h1 className='venue-name'>{item["0"].company}<span className='item-cost'>${item["1"]["0"].price}</span></h1>
@@ -36,31 +36,66 @@ class Items extends Component {
                     )}
                 </div>
             )
-        } else if (this.state.items[0][1][0].event == 'dine') {
+        } else if (this.props.allItems[0][1][0].event == 'dine') {
             return (
-                <div>
-                    {this.state.items.map((item, i) =>
-                        <div key={i}>
-                            <div className='list-item'>
-                                <h1 className='venue-name'>{item["0"].company}<span className='item-cost'>{item["1"]["0"].price}</span></h1>
-                                <h2 className='item-name'><img src='./icons/cutlery.png' className='icon-small' />{item[1][0].dishes[0].course1_type}</h2>
-                                <p>{item[1][0].dishes[0].course1}</p>
-                                <h2 className='item-name'>{item[1][0].dishes[1].course2_type}</h2>
-                                <p>{item[1][0].dishes[1].course2}</p>
-
-
-                                <div className="list-bottom">
-                                    <button className="btn btn-visit">Visit Site</button>
-                                </div>
-                            </div>
-                            <hr className='list-break' />
-                        </div>
-                    )}
-                </div>
+                <div> 
+                    {
+                       this.props.allItems.map(function (item, i) {
+                           if (item[1][0].dishes.length === 3){
+                               return  (
+                                   <div key={i}>
+                                   <div className='list-item'>
+                                       <h1 className='venue-name'>{item["0"].company}<span className='item-cost'>{item["1"]["0"].price}</span></h1>
+                                       <h2 className='item-name'><img src='./icons/cutlery.png' className='icon-small' />{item[1][0].dishes[0].course1_type}</h2>
+                                       <p>{item[1][0].dishes[0].course1}</p>
+                                       <h2 className='item-name'>{item[1][0].dishes[1].course2_type}</h2>
+                                       <p>{item[1][0].dishes[1].course2}</p>
+                                       <h2 className='item-name'>{item[1][0].dishes[2].course3_type}</h2>
+                                       <p>{item[1][0].dishes[2].course3}</p>
+       
+       
+                                       <div className="list-bottom">
+                                           <button className="btn btn-visit">Visit Site</button>
+                                       </div>
+                                   </div>
+                                   <hr className='list-break' />
+                               </div>
+                               )
+                        }
+                        
+                               
+                          
+                       })
+                    }
+               </div>
             )
+
+                
+            // return (
+                // <div>
+                //     {this.props.allItems.map((item, i) =>
+                        // <div key={i}>
+                        //     <div className='list-item'>
+                        //         <h1 className='venue-name'>{item["0"].company}<span className='item-cost'>{item["1"]["0"].price}</span></h1>
+                        //         <h2 className='item-name'><img src='./icons/cutlery.png' className='icon-small' />{item[1][0].dishes[0].course1_type}</h2>
+                        //         <p>{item[1][0].dishes[0].course1}</p>
+                        //         <h2 className='item-name'>{item[1][0].dishes[1].course2_type}</h2>
+                        //         <p>{item[1][0].dishes[1].course2}</p>
+
+
+                        //         <div className="list-bottom">
+                        //             <button className="btn btn-visit">Visit Site</button>
+                        //         </div>
+                        //     </div>
+                        //     <hr className='list-break' />
+                        // </div>
+                //     )}
+                // </div>
+            // )
         }
 
     } // render ends
+    
 
     testFunction() {
         console.log(this.state.items[0][1][0].event)

@@ -59,10 +59,11 @@ class Woapdata extends React.Component {
       return (
         <div>
           <Items {...this.state} allItems={this.state.items}></Items>
-          {/* {this.state.items.map((item) => <p>{item[0].company}</p>)} */}
         </div>
       )
     }
+
+    
   }
   
 }
