@@ -3,7 +3,6 @@ import ReactDom from 'react-dom'
 
 // Importing Components
 import Woapdata from './data.js'
-import Items from './items.js'
 
 class App extends Component {
   constructor (props) {
@@ -12,7 +11,8 @@ class App extends Component {
       page: 'List',
       sort: ['Alphabetical', 'Price Low to High', 'Price High to Low'],
       current: 'burger',
-      type: 'Protein'
+      type: 'Protein',
+      sortBy: 'Alphabetical'
     }
   }
 
@@ -31,7 +31,7 @@ class App extends Component {
           <div className='header-bottom'>
             <button className='btn purple-btn' value={this.state.type}>{this.state.type}</button>
             <h3>Sort by</h3>
-            <select className='sort-by'>
+            <select className='sort-by' onChange={this.changeSort.bind(this)}>
               {this.state.sort.map((option, i) => <option value={option} key={i}>{option}</option>)}
             </select>
           </div>
@@ -58,6 +58,22 @@ class App extends Component {
       this.setState({
         current: 'dine',
         type: 'Course'
+      })
+    }
+  }
+
+  changeSort (event) {
+    if (event.target.value === 'Alphabetical') {
+      this.setState({
+        sortBy: 'Alphabetical'
+      })
+    } else if (event.target.value === 'Price Low to High') {
+      this.setState({
+        sortBy: 'Price Low to High'
+      })
+    } else if (event.target.value === 'Price High to Low') {
+      this.setState({
+        sortBy: 'Price High to Low'
       })
     }
   }
