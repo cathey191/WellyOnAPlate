@@ -34,7 +34,7 @@ class Items extends Component {
                 <p>{item[1][0].description}</p>
 
                 <div className='list-bottom'>
-                  <button className='btn btn-visit'><a href={item[0].website}>Visit Site</a></button>
+                  <a href={item[0].website}><button className='btn btn-visit'>Visit Site</button></a>
                 </div>
               </div>
               <hr className='list-break' />
@@ -73,7 +73,7 @@ class Items extends Component {
                     <p>{item[1][0].dishes[2].course3}</p>
 
                     <div className='list-bottom'>
-                      <button className='btn btn-visit'><a href={item[0].website}>Visit Site</a></button>
+                      <a href={item[0].website}><button className='btn btn-visit'>Visit Site</button></a>
                     </div>
                   </div>
                   <hr className='list-break' />
@@ -102,7 +102,7 @@ class Items extends Component {
                     <p>{item[1][0].dishes[1].course2}</p>
 
                     <div className='list-bottom'>
-                      <button className='btn btn-visit'><a href=''>Visit Site</a></button>
+                      <a href={item[0].website}><button className='btn btn-visit'>Visit Site</button></a>
                     </div>
                   </div>
                   <hr className='list-break' />
