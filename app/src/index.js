@@ -16,19 +16,37 @@ class App extends Component {
       sortBy: 'Alphabetical',
       currentOptions: [
         {
+          id: 0,
+          option: 'All Options'
+        },
+        {
           id: 1,
-          option: 'Chicken'
+          option: 'Pork'
         },
         {
           id: 2,
-          option: 'Lamb'
+          option: 'Chicken'
         },
         {
-          id: 3,
-          option: 'Vegan'
+          id: 4,
+          option: 'Pork'
+        },
+        {
+          id: 5,
+          option: 'Vegetarian'
+        },
+        {
+          id: 6,
+          option: 'Venison'
+        },
+        {
+          id: 7,
+          option: 'Other'
         }
+
       ]
     }
+    this.changeOption = this.changeOption.bind(this)
     this.openModal = this.openModal.bind(this)
   }
 
@@ -71,7 +89,7 @@ class App extends Component {
         </div>
         <main>
           <Woapdata {...this.state} />
-          <Modal {...this.state} />
+          <Modal {...this.state} changeOption={this.state.changeOption} />
         </main>
       </div>
     )
@@ -89,20 +107,36 @@ class App extends Component {
         sortBy: 'Alphabetical',
         currentOptions: [
           {
-            id: 1,
-            option: 'Vodka'
+            id: 0,
+            option: 'All Options'
           },
           {
-            id: 2,
+            id: 1,
             option: 'Gin'
           },
           {
+            id: 2,
+            option: 'Liquer'
+          },
+          {
             id: 3,
-            option: 'Bourbon'
+            option: 'Rum'
           },
           {
             id: 4,
-            option: 'Rum'
+            option: 'Tequila'
+          },
+          {
+            id: 5,
+            option: 'Vodka'
+          },
+          {
+            id: 6,
+            option: 'Whiskey'
+          },
+          {
+            id: 7,
+            option: 'Wine'
           }
         ]
       })
@@ -113,16 +147,32 @@ class App extends Component {
         sortBy: 'Alphabetical',
         currentOptions: [
           {
+            id: 0,
+            option: 'All Options'
+          },
+          {
             id: 1,
-            option: 'Chicken'
+            option: 'Pork'
           },
           {
             id: 2,
-            option: 'Lamb'
+            option: 'Chicken'
           },
           {
-            id: 3,
-            option: 'Vegan'
+            id: 4,
+            option: 'Pork'
+          },
+          {
+            id: 5,
+            option: 'Vegetarian'
+          },
+          {
+            id: 6,
+            option: 'Venison'
+          },
+          {
+            id: 7,
+            option: 'Other'
           }
         ]
       })
@@ -130,7 +180,29 @@ class App extends Component {
       this.setState({
         current: 'dine',
         type: 'Course',
-        sortBy: 'Alphabetical'
+        sortBy: 'Alphabetical',
+        currentOptions: [
+          {
+            id: 0,
+            option: 'All Options'
+          },
+          {
+            id: 1,
+            option: 'Entree'
+          },
+          {
+            id: 2,
+            option: 'Starter'
+          },
+          {
+            id: 4,
+            option: 'Festival'
+          },
+          {
+            id: 5,
+            option: 'Dessert'
+          }
+        ]
       })
     }
   }
@@ -150,6 +222,18 @@ class App extends Component {
       })
     }
   }
+
+  changeOption(event){
+    console.log(this.props);
+    console.dir(event);
+    var currentPage = this.state.current;
+    this.setState({
+      current: currentPage + '/' + event.target.value
+    })
+    
+  }
 }
+
+
 
 ReactDom.render(<App />, document.querySelector('#header'))
