@@ -13,7 +13,7 @@ class Modal extends Component {
       <div>
         <div id='modal' className='modal'>
           <div className='modal-content'>
-            <span onClick={this.closeModal} class='close'>×</span>
+            <span onClick={this.closeModal} className='close'>×</span>
             <p>Modal content</p>
             <ul id='modalOptions'>
               {this.props.currentOptions.map(option => {

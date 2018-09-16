@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Items from './items.js'
 
 class Woapdata extends Component {
@@ -12,27 +12,25 @@ class Woapdata extends Component {
   }
 
   componentWillMount () {
-    fetch('http://192.168.33.10:4000/burger')
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            items: result
-          })
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          })
-        }
-      )
+    fetch('http://192.168.33.10:5000/burger').then(res => res.json()).then(
+      result => {
+        this.setState({
+          isLoaded: true,
+          items: result
+        })
+      },
+      error => {
+        this.setState({
+          isLoaded: true,
+          error
+        })
+      }
+    )
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.current !== this.state.items[0][1][0].event) {
-      fetch('http://192.168.33.10:4000/' + nextProps.current)
+      fetch('http://192.168.33.10:5000/' + nextProps.current)
         .then(res => res.json())
         .then(
           result => {
@@ -50,7 +48,9 @@ class Woapdata extends Component {
         )
     } else {
       if (nextProps.sortBy === 'Alphabetical') {
-        this.state.items.sort((a, b) => a[0].company.localeCompare(b[0].company))
+        this.state.items.sort((a, b) =>
+          a[0].company.localeCompare(b[0].company)
+        )
       } else if (nextProps.sortBy === 'Price Low to High') {
         this.state.items.sort((a, b) => a[1][0].price - b[1][0].price)
       } else if (nextProps.sortBy === 'Price High to Low') {
