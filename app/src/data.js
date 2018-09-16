@@ -73,7 +73,6 @@ class Woapdata extends Component {
       )
     }
   }
-
 }
 
 export default Woapdata
