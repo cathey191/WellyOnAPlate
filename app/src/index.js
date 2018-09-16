@@ -31,7 +31,7 @@ class App extends Component {
           <div className='header-bottom'>
             <button className='btn purple-btn' value={this.state.type}>{this.state.type}</button>
             <h3>Sort by</h3>
-            <select className='sort-by' onChange={this.changeSort.bind(this)}>
+            <select className='sort-by' value={this.state.sortBy} onChange={this.changeSort.bind(this)}>
               {this.state.sort.map((option, i) => <option value={option} key={i}>{option}</option>)}
             </select>
           </div>
@@ -47,17 +47,20 @@ class App extends Component {
     if (event.target.value === 'cocktail') {
       this.setState({
         current: 'cocktail',
-        type: 'Spirit'
+        type: 'Spirit',
+        sortBy: 'Alphabetical'
       })
     } else if (event.target.value === 'burger') {
       this.setState({
         current: 'burger',
-        type: 'Protein'
+        type: 'Protein',
+        sortBy: 'Alphabetical'
       })
     } else if (event.target.value === 'dine') {
       this.setState({
         current: 'dine',
-        type: 'Course'
+        type: 'Course',
+        sortBy: 'Alphabetical'
       })
     }
   }
