@@ -33,7 +33,9 @@ body {
   align-items: center;
 }
 main {
-	padding: 140px 20px 0px 20px;
+	padding-top: 112px;
+  width: 100vw;
+  height: 100vh;
 }
 // ****** SECTIONS & LAYOUT END ******
 
@@ -107,11 +109,26 @@ main {
 }
 // ****** BUTTONS END ******
 
+// ****** MAP ******
+.map{
+  width: 100%;
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: $light-blue;
+}
+// ****** MAP END ******
+
 
 
 .item {
   max-width: 1000px;
   margin: 0 auto;
+  padding: 0 20px;
+}
+
+.item:first-of-type{
+  padding-top: 20px;
 }
 
 .list-bottom {
