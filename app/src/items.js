@@ -41,7 +41,7 @@ class Items extends Component {
                        this.props.allItems.map(function (item, i) {
                            if (item[1][0].dishes.length === 3){
                                return  (
-                                <div key={i}>
+                                <div className='item' key={i}>
                                    <div className='list-item'>
                                        <h1 className='venue-name'>{item[0].company}<span className='item-cost'>${item[1][0].price}</span></h1>
                                        <h2 className='item-name'><img src='./icons/cutlery.png' className='icon-small' />{item[1][0].dishes[0].course1_type}</h2>
@@ -61,7 +61,7 @@ class Items extends Component {
                                )
                         } else {
                             return (
-                                <div key={i}>
+                                <div className='item' key={i}>
                                    <div className='list-item'>
                                        <h1 className='venue-name'>{item[0].company}<span className='item-cost'>${item[1][0].price}</span></h1>
                                        <h2 className='item-name'><img src='./icons/cutlery.png' className='icon-small' />{item[1][0].dishes[0].course1_type}</h2>
