@@ -3,7 +3,6 @@ import ReactDom from 'react-dom'
 
 // Importing Components
 import Woapdata from './data.js'
-import Items from './items.js'
 
 class App extends Component {
   constructor (props) {

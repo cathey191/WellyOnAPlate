@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Items from './items.js'
 
 class Woapdata extends React.Component {
