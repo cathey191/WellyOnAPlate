@@ -22,9 +22,9 @@ class App extends Component {
         <div className='header'>
           <div className='header-top'>
             <form className='filter-form' onChange={this.changeCurrent.bind(this)}>
-              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='cocktail' id='cocktail' /><label className='nav-group' for='cocktail'><img className='icon' src='icons/cocktail.png' alt='' /> Cocktail</label></div>
-              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='burger' id='burger' defaultChecked /><label className='nav-group' for='burger'><img className='icon' src='icons/hamburger-meal.png' alt='' /> Burger</label></div>
-              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='dine' id='dine' /><label className='nav-group' for='dine'><img className='icon' src='icons/cutlery.png' alt='' /> Dine</label></div>
+              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='cocktail' id='cocktail' /><label className='nav-group' htmlFor='cocktail'><img className='icon' src='icons/cocktail.png' alt='' /> Cocktail</label></div>
+              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='burger' id='burger' defaultChecked /><label className='nav-group' htmlFor='burger'><img className='icon' src='icons/hamburger-meal.png' alt='' /> Burger</label></div>
+              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='dine' id='dine' /><label className='nav-group' htmlFor='dine'><img className='icon' src='icons/cutlery.png' alt='' /> Dine</label></div>
             </form>
           </div>
 

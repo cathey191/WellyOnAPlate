@@ -12,7 +12,7 @@ class Woapdata extends Component {
   }
 
   componentWillMount () {
-    fetch('http://localhost:5000/burger')
+    fetch('http://192.168.33.10:5000/burger')
       .then(res => res.json())
       .then(
         result => {
@@ -32,7 +32,7 @@ class Woapdata extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.current !== this.state.items[0][1][0].event) {
-      fetch('http://localhost:5000/' + nextProps.current)
+      fetch('http://192.168.33.10:5000/' + nextProps.current)
         .then(res => res.json())
         .then(
           result => {

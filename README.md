@@ -1,4 +1,15 @@
-# WellyOnAPlate
+# Welly On A Plate Application
+
+Setup App
+```sh
+$ cd app
+$ npm install
+```
+
+Start React Server
+```sh
+$ npm start
+```
 
 # Node Server
 
