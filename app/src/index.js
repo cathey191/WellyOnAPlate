@@ -3,6 +3,7 @@ import ReactDom from 'react-dom'
 
 // Importing Components
 import Woapdata from './data.js'
+import Modal from './modal.js'
 
 class App extends Component {
   constructor (props) {
@@ -13,6 +14,7 @@ class App extends Component {
       current: 'burger',
       type: 'Protein'
     }
+    this.openModal = this.openModal.bind(this)
   }
 
   render () {
@@ -28,7 +30,7 @@ class App extends Component {
           </div>
 
           <div className='header-bottom'>
-            <button className='btn purple-btn' value={this.state.type}>{this.state.type}</button>
+            <button className='btn purple-btn' onClick={this.openModal} id='myBtn' value={this.state.type}>{this.state.type}</button>
             <h3>Sort by</h3>
             <select className='sort-by'>
               {this.state.sort.map((option, i) => <option value={option} key={i}>{option}</option>)}
@@ -37,10 +39,17 @@ class App extends Component {
         </div>
         <main>
           <Woapdata {...this.state} />
+          <Modal {...this.state} />
         </main>
       </div>
     )
   }
+  openModal () {
+    var modal = document.getElementById('modal')
+    modal.style.display = "block";
+  }
+  
+  
 
   changeCurrent (event) {
     if (event.target.value === 'cocktail') {
