@@ -101,6 +101,17 @@ main {
   font-size: 1.2rem;
   padding: 8px 15px; }
 
+.bottom-btn {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 105px;
+  border-radius: 0 20px 0 0;
+  background-color: #E56C70;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 8px 15px; }
+
 .item {
   max-width: 1000px;
   margin: 0 auto; }

@@ -8,7 +8,8 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      page: 'List',
+      nextPage: 'Map',
+      nextIcon: 'icons/Map.png',
       sort: ['Alphabetical', 'Price Low to High', 'Price High to Low'],
       current: 'burger',
       type: 'Protein',
@@ -40,6 +41,7 @@ class App extends Component {
         </div>
         <main>
           <Woapdata {...this.state} />
+          <button className='btn nav-group bottom-btn' onClick={this.changePage.bind(this)}><img className='icon' src={this.state.nextIcon} alt='' /> {this.state.nextPage}</button>
         </main>
       </div>
     )
@@ -79,6 +81,20 @@ class App extends Component {
     } else if (event.target.value === 'Price High to Low') {
       this.setState({
         sortBy: 'Price High to Low'
+      })
+    }
+  }
+
+  changePage () {
+    if (this.state.nextPage === 'Map') {
+      this.setState({
+        nextPage: 'List',
+        nextIcon: 'icons/List.png'
+      })
+    } else if (this.state.nextPage === 'List') {
+      this.setState({
+        nextPage: 'Map',
+        nextIcon: 'icons/Map.png'
       })
     }
   }
