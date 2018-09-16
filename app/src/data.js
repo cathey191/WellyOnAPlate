@@ -1,7 +1,7 @@
 import React from 'react'
 import Items from './items.js'
 
-class Woapdata extends React.Component {
+class Woapdata extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -12,7 +12,7 @@ class Woapdata extends React.Component {
   }
 
   componentWillMount () {
-    fetch('http://192.168.33.10:5000/burger')
+    fetch('http://localhost:5000/burger')
       .then(res => res.json())
       .then(
         result => {
@@ -31,22 +31,32 @@ class Woapdata extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    fetch('http://192.168.33.10:5000/' + nextProps.current)
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            items: result
-          })
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          })
-        }
-      )
+    if (nextProps.current !== this.state.items[0][1][0].event) {
+      fetch('http://localhost:5000/' + nextProps.current)
+        .then(res => res.json())
+        .then(
+          result => {
+            this.setState({
+              isLoaded: true,
+              items: result
+            })
+          },
+          error => {
+            this.setState({
+              isLoaded: true,
+              error
+            })
+          }
+        )
+    } else {
+      if (nextProps.sortBy === 'Alphabetical') {
+        this.state.items.sort((a, b) => a[0].company.localeCompare(b[0].company))
+      } else if (nextProps.sortBy === 'Price Low to High') {
+        this.state.items.sort((a, b) => a[1][0].price - b[1][0].price)
+      } else if (nextProps.sortBy === 'Price High to Low') {
+        this.state.items.sort((a, b) => b[1][0].price - a[1][0].price)
+      }
+    }
   }
 
   render () {
@@ -58,14 +68,11 @@ class Woapdata extends React.Component {
     } else {
       return (
         <div>
-          <Items {...this.state} allItems={this.state.items}></Items>
+          <Items {...this.state} allItems={this.state.items} />
         </div>
       )
     }
-
-    
   }
-  
 }
 
 export default Woapdata

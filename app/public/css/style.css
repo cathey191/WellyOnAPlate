@@ -18,7 +18,7 @@ h2 {
   font-weight: 900; }
 
 h3 {
-  color: #1dbc97;
+  color: #21237b;
   text-transform: uppercase;
   font-weight: 700; }
 
@@ -86,31 +86,43 @@ html, body {
 .header {
   margin: 0;
   width: 100%;
-  position: absolute;
+  position: fixed;
   right: 0;
-  height: 120px;
   padding: 10px;
   background: #6cabc4; }
 
 .header-bottom {
-  max-width: 300px;
+  min-width: 300px;
+  max-width: 400px;
   margin: 15px auto;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-items: center; }
 
 main {
   padding: 140px 20px 0px 20px; }
 
 .filter-form {
-  max-width: 300px;
-  margin: 0 auto; }
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; }
 
 .filter-list {
   display: inline;
   font-size: 1.3rem; }
 
+.nav-group {
+  display: flex;
+  align-items: center;
+  color: #21237b;
+  font-family: 'Nunito', sans-serif; }
+
 .sort-by {
-  background-color: white; }
+  background-color: white;
+  font-size: 1em;
+  height: 2.5em;
+  margin-left: 1em; }
 
 .btn {
   border-radius: 20px;
@@ -132,6 +144,10 @@ main {
   font-size: 1.2rem;
   padding: 8px 15px; }
 
+.item {
+  max-width: 1000px;
+  margin: 0 auto; }
+
 .list-bottom {
   margin-top: 15px; }
 
@@ -150,11 +166,15 @@ main {
 
 .icon {
   width: 25px;
-  height: 25px; }
+  height: 25px;
+  margin: 0px 5px; }
 
 .icon-small {
   width: 15px;
   height: 15px;
   margin-right: 4px; }
+
+option {
+  z-index: 100; }
 
 /*# sourceMappingURL=style.css.map */
