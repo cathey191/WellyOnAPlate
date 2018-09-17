@@ -16,13 +16,19 @@ class App extends Component {
       sortBy: 'Alphabetical',
       optionChosen: '',
       currentOptions: {
-        options: ['All Options', 'Chicken', 'Pork', 'Vegetarian', 'Venison', 'Other'],
+        options: [
+          'All Options',
+          'Chicken',
+          'Pork',
+          'Vegetarian',
+          'Venison',
+          'Other'
+        ],
         optionType: 'burger/'
       }
     }
     this.handleChangeOption = this.handleChangeOption.bind(this)
     this.openModal = this.openModal.bind(this)
-    this.setNewState = this.setNewState.bind(this)
   }
 
   render () {
@@ -30,10 +36,51 @@ class App extends Component {
       <div>
         <div className='header'>
           <div className='header-top'>
-            <form className='filter-form' onChange={this.changeCurrent.bind(this)}>
-              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='cocktail' id='cocktail' /><label className='nav-group' htmlFor='cocktail'><img className='icon' src='icons/cocktail.png' alt='' /> Cocktail</label></div>
-              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='burger' id='burger' defaultChecked /><label className='nav-group' htmlFor='burger'><img className='icon' src='icons/hamburger-meal.png' alt='' /> Burger</label></div>
-              <div className='nav-group'><input className='filter-form' type='radio' name='event' value='dine' id='dine' /><label className='nav-group' htmlFor='dine'><img className='icon' src='icons/cutlery.png' alt='' /> Dine</label></div>
+            <form
+              className='filter-form'
+              onChange={this.changeCurrent.bind(this)}
+            >
+              <div className='nav-group'>
+                <input
+                  className='filter-form'
+                  type='radio'
+                  name='event'
+                  value='cocktail'
+                  id='cocktail'
+                />
+                <label className='nav-group' htmlFor='cocktail'>
+                  <img className='icon' src='icons/cocktail.png' alt='' />
+                  {' '}
+                  Cocktail
+                </label>
+              </div>
+              <div className='nav-group'>
+                <input
+                  className='filter-form'
+                  type='radio'
+                  name='event'
+                  value='burger'
+                  id='burger'
+                  defaultChecked
+                />
+                <label className='nav-group' htmlFor='burger'>
+                  <img className='icon' src='icons/hamburger-meal.png' alt='' />
+                  {' '}
+                  Burger
+                </label>
+              </div>
+              <div className='nav-group'>
+                <input
+                  className='filter-form'
+                  type='radio'
+                  name='event'
+                  value='dine'
+                  id='dine'
+                />
+                <label className='nav-group' htmlFor='dine'>
+                  <img className='icon' src='icons/cutlery.png' alt='' /> Dine
+                </label>
+              </div>
             </form>
           </div>
 
@@ -73,15 +120,24 @@ class App extends Component {
     var modal = document.getElementById('modal')
     modal.style.display = 'block'
   }
-  
+
   changeCurrent (event) {
+    document.getElementById('filterForm')[0].checked = true
+
     if (event.target.value === 'cocktail') {
       this.setState({
         current: 'cocktail',
         type: 'Spirit',
         sortBy: 'Alphabetical',
         currentOptions: {
-          options: ['All Options', 'Gin', 'Liquer', 'Rum', 'Tequila', 'Vodka', 'Whiskey', 'Wine'],
+          options: [
+            'All Options',
+            'Gin',
+            'Rum',
+            'Vodka',
+            'Whiskey',
+            'Wine'
+          ],
           optionType: 'cocktail/'
         }
       })
@@ -91,11 +147,17 @@ class App extends Component {
         type: 'Protein',
         sortBy: 'Alphabetical',
         currentOptions: {
-          options: ['All Options', 'Chicken', 'Pork', 'Vegetarian', 'Venison', 'Other'],
+          options: [
+            'All Options',
+            'Chicken',
+            'Pork',
+            'Vegetarian',
+            'Venison',
+            'Other'
+          ],
           optionType: 'burger/'
         }
       })
-      
     } else if (event.target.value === 'dine') {
       this.setState({
         current: 'dine',
@@ -110,8 +172,6 @@ class App extends Component {
   }
 
   changeSort (event) {
-    console.log('work');
-    
     if (event.target.value === 'Alphabetical') {
       this.setState({
         sortBy: 'Alphabetical'
@@ -127,45 +187,30 @@ class App extends Component {
     }
   }
 
-  handleChangeOption(option){
-    if (option === 'All Options'){
+  handleChangeOption (option) {
+    this.setState({
+      sortBy: 'alphabetical'
+    })
+    if (option === 'All Options') {
       this.setState({
         current: this.state.currentOptions.optionType
       })
     } else if (option !== 'All Options') {
-      if (this.state.type === 'Protein'){
+      if (this.state.type === 'Protein') {
         this.setState({
           current: 'burger/type:' + option
         })
-        console.log(this.state.current);
-        
-      } else if (this.state.type === 'Spirit'){
+      } else if (this.state.type === 'Spirit') {
         this.setState({
           current: 'cocktail/type:' + option
         })
-      } else if (this.state.type === 'Course'){
+      } else if (this.state.type === 'Course') {
         this.setState({
           current: 'dine/type:' + option
         })
       }
-    } 
-      
-
-      
+    }
   }
-
-  setNewState(option){
-    // this.setState({
-    //   current: 'burger'
-    // })
-
-    console.log(this.state.current);
-  }
-    
-
-    
 }
-
-
 
 ReactDom.render(<App />, document.querySelector('#header'))

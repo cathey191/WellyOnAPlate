@@ -38,9 +38,9 @@ module.exports = function (grunt) {
       sass: {
         files: ['public/**/*.scss', 'src/modal/modal.scss', 'public/sass/_type.scss'],
         tasks: [
-          // 'sasslint', 
+          // 'sasslint',
           'sass']
-      },
+      }
       // css: {
       //   files: ['public/**/style.css'],
       //   tasks: ['cssmin']

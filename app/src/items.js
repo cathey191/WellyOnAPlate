@@ -17,7 +17,7 @@ class Items extends Component {
       return (
         <div>
           {this.props.allItems.map((item, i) => (
-            <div key={i}>
+            <div className='item' key={i}>
               <div className='list-item'>
                 <h1 className='venue-name'>
                   {item[0].company}
@@ -34,7 +34,9 @@ class Items extends Component {
                 <p>{item[1][0].description}</p>
 
                 <div className='list-bottom'>
-                  <a href={'http://' + item[0].website}><button className='btn btn-visit'>Visit Site</button></a>
+                  <a href={'http://' + item[0].website}>
+                    <button className='btn btn-visit'>Visit Site</button>
+                  </a>
                 </div>
               </div>
               <hr className='list-break' />
@@ -48,7 +50,7 @@ class Items extends Component {
           {this.props.allItems.map(function (item, i) {
             if (item[1][0].dishes.length === 3) {
               return (
-                <div key={i}>
+                <div className='item' key={i}>
                   <div className='list-item'>
                     <h1 className='venue-name'>
                       {item[0].company}
@@ -73,7 +75,9 @@ class Items extends Component {
                     <p>{item[1][0].dishes[2].course3}</p>
 
                     <div className='list-bottom'>
-                      <a href={'http://' + item[0].website}><button className='btn btn-visit'>Visit Site</button></a>
+                      <a href={'http://' + item[0].website}>
+                        <button className='btn btn-visit'>Visit Site</button>
+                      </a>
                     </div>
                   </div>
                   <hr className='list-break' />
@@ -81,7 +85,7 @@ class Items extends Component {
               )
             } else {
               return (
-                <div key={i}>
+                <div className='item' key={i}>
                   <div className='list-item'>
                     <h1 className='venue-name'>
                       {item[0].company}
@@ -102,7 +106,9 @@ class Items extends Component {
                     <p>{item[1][0].dishes[1].course2}</p>
 
                     <div className='list-bottom'>
-                      <a href={'http://' + item[0].website}><button className='btn btn-visit'>Visit Site</button></a>
+                      <a href={'http://' + item[0].website}>
+                        <button className='btn btn-visit'>Visit Site</button>
+                      </a>
                     </div>
                   </div>
                   <hr className='list-break' />

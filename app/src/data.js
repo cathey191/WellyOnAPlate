@@ -29,9 +29,9 @@ class Woapdata extends Component {
     )
   }
 
-  componentWillReceiveProps (nextProps) {    
+  componentWillReceiveProps (nextProps) {
     if (nextProps.current !== this.state.currentState) {
-      this.setState({currentState: nextProps.current})
+      this.setState({ currentState: nextProps.current })
       fetch('http://192.168.33.10:5000/' + nextProps.current)
         .then(res => res.json())
         .then(

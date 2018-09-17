@@ -16,14 +16,25 @@ class Modal extends Component {
             <span onClick={this.closeModal} className='close'>×</span>
             <p>Modal content</p>
             <ul id='modalOptions'>
-            <form onChange={this.onChange}>
-              {this.props.currentOptions.options.map((option, index) => {
-                return (
-                  // <li key={option.id} option={option}><span className='list-checkbox'></span>{option.option}</li>
-                  <div key={index} option={option}><input className='filter-form' type='radio' name='event' value={option}/> {option} </div>
-                )
-              })}
-              
+              <form onChange={this.onChange} id='filterForm'>
+                {this.props.currentOptions.options.map((option, index) => {
+                  return (
+                    (
+                      <div key={index} option={option}>
+                        <input
+                          className='filter-form'
+                          type='radio'
+                          name='event'
+                          value={option}
+                        />
+                        {' '}
+                        {option}
+                        {' '}
+                      </div>
+                    )
+                  )
+                })}
+
               </form>
             </ul>
           </div>
@@ -32,9 +43,7 @@ class Modal extends Component {
     ) // return ends
   } // render ends
 
-  onChange(e){
-    // console.log(this.props);
-    
+  onChange (e) {
     this.props.changeOption(e.target.value)
   }
 
@@ -42,7 +51,6 @@ class Modal extends Component {
     var modal = document.getElementById('modal')
     modal.style.display = 'none'
   }
-
 } // component end
 
 export default Modal
