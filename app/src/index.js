@@ -17,7 +17,7 @@ class App extends Component {
       optionChosen: '',
       currentOptions: {
         options: ['All Options', 'Chicken', 'Pork', 'Vegetarian', 'Venison', 'Other'],
-        optionType: 'burger'
+        optionType: 'burger/'
       }
     }
     this.handleChangeOption = this.handleChangeOption.bind(this)
@@ -82,7 +82,7 @@ class App extends Component {
         sortBy: 'Alphabetical',
         currentOptions: {
           options: ['All Options', 'Gin', 'Liquer', 'Rum', 'Tequila', 'Vodka', 'Whiskey', 'Wine'],
-          optionType: 'cocktail'
+          optionType: 'cocktail/'
         }
       })
     } else if (event.target.value === 'burger') {
@@ -92,9 +92,10 @@ class App extends Component {
         sortBy: 'Alphabetical',
         currentOptions: {
           options: ['All Options', 'Chicken', 'Pork', 'Vegetarian', 'Venison', 'Other'],
-          optionType: 'burger'
+          optionType: 'burger/'
         }
       })
+      
     } else if (event.target.value === 'dine') {
       this.setState({
         current: 'dine',
@@ -102,13 +103,15 @@ class App extends Component {
         sortBy: 'Alphabetical',
         currentOptions: {
           options: ['All Options', 'Entree', 'Starter', 'Festival', 'Dessert'],
-          optionType: 'dine'
+          optionType: 'dine/'
         }
       })
     }
   }
 
   changeSort (event) {
+    console.log('work');
+    
     if (event.target.value === 'Alphabetical') {
       this.setState({
         sortBy: 'Alphabetical'
@@ -125,40 +128,28 @@ class App extends Component {
   }
 
   handleChangeOption(option){
-
-    console.log(this.state.type);
     if (option === 'All Options'){
       this.setState({
         current: this.state.currentOptions.optionType
       })
-      console.log(this.state.currentOptions.optionType);
-      console.log(this.state.current);
-      
-    } else {
+    } else if (option !== 'All Options') {
       if (this.state.type === 'Protein'){
-        this.setState({
-          current: 'burger'
-        })
         this.setState({
           current: 'burger/type:' + option
         })
+        console.log(this.state.current);
+        
       } else if (this.state.type === 'Spirit'){
-        this.setState({
-          current: 'cocktail'
-        })
         this.setState({
           current: 'cocktail/type:' + option
         })
       } else if (this.state.type === 'Course'){
-        
-        this.setState({
-          current: 'dine'
-        })
         this.setState({
           current: 'dine/type:' + option
         })
       }
     } 
+      
 
       
   }
