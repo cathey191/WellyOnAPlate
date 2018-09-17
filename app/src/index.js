@@ -14,40 +14,15 @@ class App extends Component {
       current: 'burger',
       type: 'Protein',
       sortBy: 'Alphabetical',
-      currentOptions: [
-        {
-          id: 0,
-          option: 'All Options'
-        },
-        {
-          id: 1,
-          option: 'Pork'
-        },
-        {
-          id: 2,
-          option: 'Chicken'
-        },
-        {
-          id: 4,
-          option: 'Pork'
-        },
-        {
-          id: 5,
-          option: 'Vegetarian'
-        },
-        {
-          id: 6,
-          option: 'Venison'
-        },
-        {
-          id: 7,
-          option: 'Other'
-        }
-
-      ]
+      optionChosen: '',
+      currentOptions: {
+        options: ['All Options', 'Chicken', 'Pork', 'Vegetarian', 'Venison', 'Other'],
+        optionType: 'burger'
+      }
     }
-    this.changeOption = this.changeOption.bind(this)
+    this.handleChangeOption = this.handleChangeOption.bind(this)
     this.openModal = this.openModal.bind(this)
+    this.setNewState = this.setNewState.bind(this)
   }
 
   render () {
@@ -89,7 +64,7 @@ class App extends Component {
         </div>
         <main>
           <Woapdata {...this.state} />
-          <Modal {...this.state} changeOption={this.state.changeOption} />
+          <Modal {...this.state} changeOption={this.handleChangeOption} />
         </main>
       </div>
     )
@@ -105,104 +80,30 @@ class App extends Component {
         current: 'cocktail',
         type: 'Spirit',
         sortBy: 'Alphabetical',
-        currentOptions: [
-          {
-            id: 0,
-            option: 'All Options'
-          },
-          {
-            id: 1,
-            option: 'Gin'
-          },
-          {
-            id: 2,
-            option: 'Liquer'
-          },
-          {
-            id: 3,
-            option: 'Rum'
-          },
-          {
-            id: 4,
-            option: 'Tequila'
-          },
-          {
-            id: 5,
-            option: 'Vodka'
-          },
-          {
-            id: 6,
-            option: 'Whiskey'
-          },
-          {
-            id: 7,
-            option: 'Wine'
-          }
-        ]
+        currentOptions: {
+          options: ['All Options', 'Gin', 'Liquer', 'Rum', 'Tequila', 'Vodka', 'Whiskey', 'Wine'],
+          optionType: 'cocktail'
+        }
       })
     } else if (event.target.value === 'burger') {
       this.setState({
         current: 'burger',
         type: 'Protein',
         sortBy: 'Alphabetical',
-        currentOptions: [
-          {
-            id: 0,
-            option: 'All Options'
-          },
-          {
-            id: 1,
-            option: 'Pork'
-          },
-          {
-            id: 2,
-            option: 'Chicken'
-          },
-          {
-            id: 4,
-            option: 'Pork'
-          },
-          {
-            id: 5,
-            option: 'Vegetarian'
-          },
-          {
-            id: 6,
-            option: 'Venison'
-          },
-          {
-            id: 7,
-            option: 'Other'
-          }
-        ]
+        currentOptions: {
+          options: ['All Options', 'Chicken', 'Pork', 'Vegetarian', 'Venison', 'Other'],
+          optionType: 'burger'
+        }
       })
     } else if (event.target.value === 'dine') {
       this.setState({
         current: 'dine',
         type: 'Course',
         sortBy: 'Alphabetical',
-        currentOptions: [
-          {
-            id: 0,
-            option: 'All Options'
-          },
-          {
-            id: 1,
-            option: 'Entree'
-          },
-          {
-            id: 2,
-            option: 'Starter'
-          },
-          {
-            id: 4,
-            option: 'Festival'
-          },
-          {
-            id: 5,
-            option: 'Dessert'
-          }
-        ]
+        currentOptions: {
+          options: ['All Options', 'Entree', 'Starter', 'Festival', 'Dessert'],
+          optionType: 'dine'
+        }
       })
     }
   }
@@ -223,15 +124,55 @@ class App extends Component {
     }
   }
 
-  changeOption(event){
-    console.log(this.props);
-    console.dir(event);
-    var currentPage = this.state.current;
-    this.setState({
-      current: currentPage + '/' + event.target.value
-    })
-    
+  handleChangeOption(option){
+
+    console.log(this.state.type);
+    if (option === 'All Options'){
+      this.setState({
+        current: this.state.currentOptions.optionType
+      })
+      console.log(this.state.currentOptions.optionType);
+      console.log(this.state.current);
+      
+    } else {
+      if (this.state.type === 'Protein'){
+        this.setState({
+          current: 'burger'
+        })
+        this.setState({
+          current: 'burger/type:' + option
+        })
+      } else if (this.state.type === 'Spirit'){
+        this.setState({
+          current: 'cocktail'
+        })
+        this.setState({
+          current: 'cocktail/type:' + option
+        })
+      } else if (this.state.type === 'Course'){
+        
+        this.setState({
+          current: 'dine'
+        })
+        this.setState({
+          current: 'dine/type:' + option
+        })
+      }
+    } 
+
+      
   }
+
+  setNewState(option){
+    // this.setState({
+    //   current: 'burger'
+    // })
+
+    console.log(this.state.current);
+  }
+    
+
+    
 }
 
 

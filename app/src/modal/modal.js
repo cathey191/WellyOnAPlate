@@ -4,8 +4,8 @@ import './modal.css'
 class Modal extends Component {
   constructor (props) {
     super(props)
-    this.state = {} // this.state end
     this.closeModal = this.closeModal.bind(this)
+    this.onChange = this.onChange.bind(this)
   } // constructor end
 
   render () {
@@ -16,11 +16,11 @@ class Modal extends Component {
             <span onClick={this.closeModal} className='close'>×</span>
             <p>Modal content</p>
             <ul id='modalOptions'>
-            <form onChange={this.props.changeOption}>
-              {this.props.currentOptions.map(option => {
+            <form onChange={this.onChange}>
+              {this.props.currentOptions.options.map((option, index) => {
                 return (
                   // <li key={option.id} option={option}><span className='list-checkbox'></span>{option.option}</li>
-                  <div key={option.id} option={option}><input className='filter-form' type='radio' name='event' value='cocktail'/> {option.option} </div>
+                  <div key={index} option={option}><input className='filter-form' type='radio' name='event' value={option}/> {option} </div>
                 )
               })}
               
@@ -31,6 +31,12 @@ class Modal extends Component {
       </div>
     ) // return ends
   } // render ends
+
+  onChange(e){
+    // console.log(this.props);
+    
+    this.props.changeOption(e.target.value)
+  }
 
   closeModal () {
     var modal = document.getElementById('modal')
