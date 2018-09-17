@@ -13,23 +13,23 @@ class Modal extends Component {
       <div>
         <div id='modal' className='modal'>
           <div className='modal-content'>
-            <span onClick={this.closeModal} className='close'>×</span>
-            <p>Modal content</p>
-            <ul id='modalOptions'>
+            <span onClick={this.closeModal} className='close'>X</span>
+            <span className='clear' />
+            <h1 className='text-center'>{this.props.type}</h1>
+            <br />
+            <ul id='modalOptions' className='option-holder'>
               <form onChange={this.onChange} id='filterForm'>
                 {this.props.currentOptions.options.map((option, index) => {
                   return (
                     (
-                      <div key={index} option={option}>
+                      <div key={index} option={option} className='modal-options'>
+                        <label htmlFor={option}>{option}</label>
                         <input
-                          className='filter-form'
                           type='radio'
                           name='event'
                           value={option}
+                          id={option}
                         />
-                        {' '}
-                        {option}
-                        {' '}
                       </div>
                     )
                   )
@@ -37,6 +37,7 @@ class Modal extends Component {
 
               </form>
             </ul>
+            <br />
           </div>
         </div>
       </div>

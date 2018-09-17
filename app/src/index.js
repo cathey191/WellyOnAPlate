@@ -125,6 +125,7 @@ class App extends Component {
     document.getElementById('filterForm')[0].checked = true
 
     if (event.target.value === 'cocktail') {
+      window.scrollTo(0, 0)
       this.setState({
         current: 'cocktail',
         type: 'Spirit',
@@ -142,6 +143,7 @@ class App extends Component {
         }
       })
     } else if (event.target.value === 'burger') {
+      window.scrollTo(0, 0)
       this.setState({
         current: 'burger',
         type: 'Protein',
@@ -159,6 +161,7 @@ class App extends Component {
         }
       })
     } else if (event.target.value === 'dine') {
+      window.scrollTo(0, 0)
       this.setState({
         current: 'dine',
         type: 'Course',
@@ -172,6 +175,7 @@ class App extends Component {
   }
 
   changeSort (event) {
+    window.scrollTo(0, 0)
     if (event.target.value === 'Alphabetical') {
       this.setState({
         sortBy: 'Alphabetical'
@@ -188,6 +192,7 @@ class App extends Component {
   }
 
   handleChangeOption (option) {
+    window.scrollTo(0, 0)
     this.setState({
       sortBy: 'alphabetical'
     })

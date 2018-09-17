@@ -28,17 +28,21 @@
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  /* Could be more or less, depending on screen size */ }
+  /* Could be more or less, depending on screen size */
+  max-width: 500px; }
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: #6cabc4;
   float: right;
   font-size: 28px;
   font-weight: bold; }
 
+.clear {
+  clear: both; }
+
 .close:hover, .close:focus {
-  color: black;
+  color: #21237b;
   text-decoration: none;
   cursor: pointer; }
 
@@ -46,5 +50,19 @@
   background: grey;
   width: 15px;
   height: 15px; }
+
+.option-holder {
+  width: 250px;
+  margin: 0 auto; }
+
+.modal-options {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 900; }
+
+.modal-options:hover label {
+  color: #6cabc4; }
 
 /*# sourceMappingURL=modal.css.map */

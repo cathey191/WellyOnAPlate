@@ -19,7 +19,7 @@ class Items extends Component {
           {this.props.allItems.map((item, i) => (
             <div className='item' key={i}>
               <div className='list-item'>
-                <h1 className='venue-name'>
+                <h1>
                   {item[0].company}
                   <span className='item-cost'>${item[1][0].price}</span>
                 </h1>
