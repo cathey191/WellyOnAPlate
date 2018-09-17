@@ -31,7 +31,7 @@ class App extends Component {
 
           <div className='header-bottom'>
             <button className='btn purple-btn' value={this.state.type}>{this.state.type}</button>
-            <div className='nav-group'>
+            <div className='nav-group' id='sort-by'>
               <h3>Sort by</h3>
               <select className='sort-by' value={this.state.sortBy} onChange={this.changeSort.bind(this)}>
                 {this.state.sort.map((option, i) => <option value={option} key={i}>{option}</option>)}
@@ -49,18 +49,21 @@ class App extends Component {
 
   changeCurrent (event) {
     if (event.target.value === 'cocktail') {
+      window.scrollTo(0, 0)
       this.setState({
         current: 'cocktail',
         type: 'Spirit',
         sortBy: 'Alphabetical'
       })
     } else if (event.target.value === 'burger') {
+      window.scrollTo(0, 0)
       this.setState({
         current: 'burger',
         type: 'Protein',
         sortBy: 'Alphabetical'
       })
     } else if (event.target.value === 'dine') {
+      window.scrollTo(0, 0)
       this.setState({
         current: 'dine',
         type: 'Course',
@@ -71,14 +74,17 @@ class App extends Component {
 
   changeSort (event) {
     if (event.target.value === 'Alphabetical') {
+      window.scrollTo(0, 0)
       this.setState({
         sortBy: 'Alphabetical'
       })
     } else if (event.target.value === 'Price Low to High') {
+      window.scrollTo(0, 0)
       this.setState({
         sortBy: 'Price Low to High'
       })
     } else if (event.target.value === 'Price High to Low') {
+      window.scrollTo(0, 0)
       this.setState({
         sortBy: 'Price High to Low'
       })
@@ -87,15 +93,19 @@ class App extends Component {
 
   changePage () {
     if (this.state.nextPage === 'Map') {
+      window.scrollTo(0, 0)
       this.setState({
         nextPage: 'List',
         nextIcon: 'icons/List.png'
       })
+      document.querySelector('#sort-by').className += ' displayNone'
     } else if (this.state.nextPage === 'List') {
+      window.scrollTo(0, 0)
       this.setState({
         nextPage: 'Map',
         nextIcon: 'icons/Map.png'
       })
+      document.querySelector('#sort-by').classList.remove('displayNone')
     }
   }
 }

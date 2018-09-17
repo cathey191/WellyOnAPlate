@@ -158,4 +158,7 @@ main {
 option {
   z-index: 100; }
 
+.displayNone {
+  display: none; }
+
 /*# sourceMappingURL=style.css.map */
