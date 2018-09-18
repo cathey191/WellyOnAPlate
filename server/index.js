@@ -305,25 +305,8 @@ function removeSymbol (item) {
   return item
 }
 
-function getMapData (input) {
-  app.get('/map', function (res, req) {})
-}
 
-// ***** GOOGLE MAPS *****
-https
-  .get(
-    'https://maps.googleapis.com/maps/api/js?key=AIzaSyAEGhvWWiLrX4l_ObUFYi1g-JzkIVzCrtU&libraries=places',
-    res => {
-      getMapData(res)
 
-      res.on('data', d => {
-        process.stdout.write(d)
-      })
-    }
-  )
-  .on('error', e => {
-    console.error(e)
-  })
 
 app.set('port', process.env.PORT || 5000)
 app.listen(app.get('port'), function () {
