@@ -4,6 +4,7 @@ import ReactDom from 'react-dom'
 // Importing Components
 import Woapdata from './data.js'
 import Modal from './modal/modal.js'
+import Mapdata from './mapdata.js'
 
 class App extends Component {
   constructor (props) {
@@ -86,7 +87,13 @@ class App extends Component {
           </div>
 
           <div className='header-bottom'>
-            <button className='btn purple-btn' onClick={this.openModal} value={this.state.type}>{this.state.type}</button>
+            <button
+              className='btn purple-btn'
+              onClick={this.openModal}
+              value={this.state.type}
+            >
+              {this.state.type}
+            </button>
             <div className='nav-group' id='sort-by'>
               <h3>Sort by</h3>
               <select
@@ -105,9 +112,17 @@ class App extends Component {
           </div>
         </div>
         <main>
+          <Mapdata {...this.state} />
           <Woapdata {...this.state} />
           <Modal {...this.state} changeOption={this.handleChangeOption} />
-          <button className='btn nav-group bottom-btn' onClick={this.changePage.bind(this)}><img className='icon' src={this.state.nextIcon} alt='' /> {this.state.nextPage}</button>
+          <button
+            className='btn nav-group bottom-btn'
+            onClick={this.changePage.bind(this)}
+          >
+            <img className='icon' src={this.state.nextIcon} alt='' />
+            {' '}
+            {this.state.nextPage}
+          </button>
         </main>
       </div>
     )
@@ -128,14 +143,7 @@ class App extends Component {
         type: 'Spirit',
         sortBy: 'Alphabetical',
         currentOptions: {
-          options: [
-            'All Options',
-            'Gin',
-            'Rum',
-            'Vodka',
-            'Whiskey',
-            'Wine'
-          ],
+          options: ['All Options', 'Gin', 'Rum', 'Vodka', 'Whiskey', 'Wine'],
           optionType: 'cocktail/'
         }
       })

@@ -15,30 +15,28 @@ class Woapdata extends Component {
   }
 
   componentWillMount () {
-    fetch('http://localhost:5000/burger')
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            items: result,
-            pageChange: false
-          })
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error,
-            pageChange: false
-          })
-        }
-      )
+    fetch('http://192.168.33.10:5000/burger').then(res => res.json()).then(
+      result => {
+        this.setState({
+          isLoaded: true,
+          items: result,
+          pageChange: false
+        })
+      },
+      error => {
+        this.setState({
+          isLoaded: true,
+          error,
+          pageChange: false
+        })
+      }
+    )
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.current !== this.state.currentState) {
       this.setState({ currentState: nextProps.current })
-      fetch('http://localhost:5000/' + nextProps.current)
+      fetch('http://192.168.33.10:5000/' + nextProps.current)
         .then(res => res.json())
         .then(
           result => {
@@ -63,7 +61,9 @@ class Woapdata extends Component {
       })
     } else {
       if (nextProps.sortBy === 'Alphabetical') {
-        this.state.items.sort((a, b) => a[0].company.localeCompare(b[0].company))
+        this.state.items.sort((a, b) =>
+          a[0].company.localeCompare(b[0].company)
+        )
         this.setState({
           pageChange: false
         })
@@ -95,9 +95,7 @@ class Woapdata extends Component {
           </div>
         )
       } else if (this.state.pageChange) {
-        return (
-          <div id='map' className='map' />
-        )
+        return <div id='map' className='map' />
       }
     }
   }
