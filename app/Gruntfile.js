@@ -9,7 +9,8 @@ module.exports = function (grunt) {
           style: 'expand'
         },
         files: {
-          'public/css/style.css': 'public/sass/style.scss'
+          'public/css/style.css': 'public/sass/style.scss',
+          'src/modal/modal.css': 'src/modal/modal.scss'
         }
       }
     },
@@ -35,7 +36,7 @@ module.exports = function (grunt) {
     },
     watch: {
       sass: {
-        files: ['public/**/*.scss', 'public/sass/_type.scss'],
+        files: ['public/**/*.scss', 'src/modal/modal.scss', 'public/sass/_type.scss'],
         tasks: [
           'sass']
       }
