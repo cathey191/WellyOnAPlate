@@ -10,6 +10,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      currentMapState: false,
       nextPage: 'Map',
       nextIcon: 'icons/Map.png',
       sort: ['Alphabetical', 'Price Low to High', 'Price High to Low'],
@@ -29,6 +30,7 @@ class App extends Component {
         optionType: 'burger/'
       }
     }
+    this.mapChangeHandler = this.mapChangeHandler.bind(this)
     this.handleChangeOption = this.handleChangeOption.bind(this)
     this.openModal = this.openModal.bind(this)
   }
@@ -113,7 +115,7 @@ class App extends Component {
         </div>
         <main>
           <Mapdata {...this.state} />
-          <Woapdata {...this.state} />
+          <Woapdata {...this.state} mapChangeHandler = {this.mapChangeHandler} />
           <Modal {...this.state} changeOption={this.handleChangeOption} />
           <button
             className='btn nav-group bottom-btn'
@@ -241,6 +243,14 @@ class App extends Component {
         })
       }
     }
+  }
+
+  mapChangeHandler (e){
+    console.log('working');
+    
+    this.setState({
+      currentMapState: true
+    })
   }
 }
 

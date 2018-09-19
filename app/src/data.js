@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Items from './items.js'
+import MapContainer from './mapdata.js'
+import {Map, GoogleApiWrapper} from 'google-maps-react';
 
 class Woapdata extends Component {
+  
   constructor (props) {
     super(props)
     this.state = {
@@ -10,7 +13,8 @@ class Woapdata extends Component {
       items: [],
       currentPage: 'List',
       pageChange: false,
-      currentState: 'burger'
+      currentState: 'burger',
+      mapState: false
     }
   }
 
@@ -81,6 +85,9 @@ class Woapdata extends Component {
     }
   }
 
+
+      
+
   render () {
     const { error, isLoaded } = this.state
     if (error) {
@@ -89,16 +96,26 @@ class Woapdata extends Component {
       return <div>Loading...</div>
     } else {
       if (!this.state.pageChange) {
+        
+        
         return (
           <div>
+            
             <Items {...this.state} allItems={this.state.items} />
           </div>
         )
       } else if (this.state.pageChange) {
-        return <div id='map' className='map' />
+        
+        return (
+          <div>
+            
+          </div>
+        )
+          
       }
     }
   }
 }
+
 
 export default Woapdata

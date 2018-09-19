@@ -1,28 +1,23 @@
 import React, { Component } from 'react'
+import {Map, GoogleApiWrapper} from 'google-maps-react';
+import Woapdata from './data.js'
 
-class Mapdata extends Component {
+export class MapContainer extends Component {
   constructor (props) {
     super(props)
+    this.state = {
+      
+    }
   }
-
-  componentDidMount () {
-    fetch('http://192.168.33.10:5000/map').then(res => res.json()).then(
-      result => {
-        console.log(result)
-      },
-      error => {
-        this.setState({
-          isLoaded: true,
-          error,
-          pageChange: false
-        })
-      }
-    )
-  }
-
-  render () {
-    return <div />
+  render() {
+    
+    return (
+      <Map google={this.props.google} zoom={14} visible={true} />
+      
+    );
   }
 }
 
-export default Mapdata
+export default GoogleApiWrapper({
+  apiKey: ('AIzaSyDK1LL8OIe3T_SZ6WT3U3mtCSALXXD0xaQ')
+})(MapContainer)
