@@ -32,6 +32,8 @@ class Items extends Component {
                   {item[1][0].title}
                 </h2>
                 <p>{item[1][0].description}</p>
+                <br />
+                <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                 <div className='list-bottom'>
                   <a href={'http://' + item[0].website}>

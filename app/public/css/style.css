@@ -130,9 +130,6 @@ main {
 .item:first-of-type {
   padding-top: 20px; }
 
-.list-bottom {
-  margin-top: 15px; }
-
 .list-bottom::after {
   content: "";
   clear: both;
