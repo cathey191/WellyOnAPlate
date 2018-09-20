@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import Items from './items.js'
 import MapContainer from './mapdata.js'
-import {Map, GoogleApiWrapper} from 'google-maps-react';
 
 class Woapdata extends Component {
-  
   constructor (props) {
     super(props)
     this.state = {
@@ -12,7 +10,6 @@ class Woapdata extends Component {
       isLoaded: false,
       items: [],
       currentPage: 'List',
-      pageChange: false,
       currentState: 'burger',
       mapState: false
     }
@@ -23,15 +20,13 @@ class Woapdata extends Component {
       result => {
         this.setState({
           isLoaded: true,
-          items: result,
-          pageChange: false
+          items: result
         })
       },
       error => {
         this.setState({
           isLoaded: true,
-          error,
-          pageChange: false
+          error
         })
       }
     )
@@ -53,70 +48,49 @@ class Woapdata extends Component {
           error => {
             this.setState({
               isLoaded: true,
-              error,
-              pageChange: false
+              error
             })
           }
         )
     } else if (nextProps.nextPage === this.state.currentPage) {
       this.setState({
-        currentPage: nextProps.nextPage,
-        pageChange: true
+        currentPage: nextProps.nextPage
       })
     } else {
       if (nextProps.sortBy === 'Alphabetical') {
         this.state.items.sort((a, b) =>
           a[0].company.localeCompare(b[0].company)
         )
-        this.setState({
-          pageChange: false
-        })
       } else if (nextProps.sortBy === 'Price Low to High') {
         this.state.items.sort((a, b) => a[1][0].price - b[1][0].price)
-        this.setState({
-          pageChange: false
-        })
       } else if (nextProps.sortBy === 'Price High to Low') {
         this.state.items.sort((a, b) => b[1][0].price - a[1][0].price)
-        this.setState({
-          pageChange: false
-        })
       }
     }
   }
 
-
-      
-
   render () {
-    var currentMapState = false;
     const { error, isLoaded } = this.state
     if (error) {
       return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
       return <div>Loading...</div>
     } else {
-      if (!this.state.pageChange) {
-        // currentMapState = false;
-        
+      if (this.props.pageChange === 'List') {
         return (
           <div>
-            
             <Items {...this.state} allItems={this.state.items} />
           </div>
         )
-      } else if (this.state.pageChange) {
-        // currentMapState = true;
+      } else if (this.props.pageChange === 'Map') {
         return (
           <div>
             <MapContainer />
           </div>
         )
-          
       }
     }
   }
 }
-
 
 export default Woapdata

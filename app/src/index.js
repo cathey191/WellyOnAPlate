@@ -4,7 +4,6 @@ import ReactDom from 'react-dom'
 // Importing Components
 import Woapdata from './data.js'
 import Modal from './modal/modal.js'
-import Mapdata from './mapdata.js'
 
 class App extends Component {
   constructor (props) {
@@ -18,6 +17,7 @@ class App extends Component {
       type: 'Protein',
       sortBy: 'Alphabetical',
       optionChosen: '',
+      pageChange: 'List',
       currentOptions: {
         options: [
           'All Options',
@@ -115,7 +115,7 @@ class App extends Component {
         </div>
         <main>
           {/* <Mapdata {...this.state} /> */}
-          <Woapdata {...this.state} mapChangeHandler = {this.mapChangeHandler} />
+          <Woapdata {...this.state} mapChangeHandler={this.mapChangeHandler} />
           <Modal {...this.state} changeOption={this.handleChangeOption} />
           <button
             className='btn nav-group bottom-btn'
@@ -206,14 +206,16 @@ class App extends Component {
       window.scrollTo(0, 0)
       this.setState({
         nextPage: 'List',
-        nextIcon: 'icons/List.png'
+        nextIcon: 'icons/List.png',
+        pageChange: 'Map'
       })
       document.querySelector('#sort-by').className += ' displayNone'
     } else if (this.state.nextPage === 'List') {
       window.scrollTo(0, 0)
       this.setState({
         nextPage: 'Map',
-        nextIcon: 'icons/Map.png'
+        nextIcon: 'icons/Map.png',
+        pageChange: 'List'
       })
       document.querySelector('#sort-by').classList.remove('displayNone')
     }
@@ -245,9 +247,9 @@ class App extends Component {
     }
   }
 
-  mapChangeHandler (e){
-    console.log('working');
-    
+  mapChangeHandler (e) {
+    console.log('working')
+
     this.setState({
       currentMapState: true
     })
