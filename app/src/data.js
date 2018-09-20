@@ -85,12 +85,12 @@ class Woapdata extends Component {
       } else if (this.props.pageChange === 'Map') {
         return (
           <div>
-            <MapContainer />
+            <MapContainer {...this.state}/>
           </div>
         )
       }
     }
-  }
+}
 }
 
 export default Woapdata
