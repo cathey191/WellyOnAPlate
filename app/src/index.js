@@ -114,7 +114,7 @@ class App extends Component {
           </div>
         </div>
         <main>
-          <Mapdata {...this.state} />
+          {/* <Mapdata {...this.state} /> */}
           <Woapdata {...this.state} mapChangeHandler = {this.mapChangeHandler} />
           <Modal {...this.state} changeOption={this.handleChangeOption} />
           <button
