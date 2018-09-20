@@ -2,6 +2,9 @@ const express = require('express')
 const cors = require('cors')
 const https = require('https')
 const woap = require('./data/woap.json')
+const googleAPI = require('./config.json')
+
+var key = googleAPI[0].googleAPI
 
 const app = express()
 
@@ -293,7 +296,7 @@ function removeFalse (array) {
       newArray.push(array[i])
     }
     if (array.length === i + 1) {
-      return newArray
+      return getPlaceId(newArray)
     }
   }
 }
@@ -305,8 +308,28 @@ function removeSymbol (item) {
   return item
 }
 
-
-
+function getPlaceId (array) {
+  var id = []
+  for (var i = 0; i < array.length; i++) {
+    var spaceName = array[i][0].company.split(' ').join('%20')
+    let body = ''
+    https.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + spaceName + '%20wellington&inputtype=textquery&key=' + key, function (res) {
+      res.on('data', function (chunk) {
+        body += chunk.toString()
+      })
+      res.on('end', () => {
+        id.push(body)
+        if (array.length === id.length) {
+          var newArray = []
+          newArray.push(array)
+          newArray.push(id)
+          console.log(newArray.length)
+          return newArray
+        }
+      })
+    })
+  }
+}
 
 app.set('port', process.env.PORT || 5000)
 app.listen(app.get('port'), function () {

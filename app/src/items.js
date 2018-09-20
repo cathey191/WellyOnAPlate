@@ -10,9 +10,10 @@ class Items extends Component {
   }
 
   render () {
+    console.log(this.state.items)
     if (
-      this.props.allItems[0][1][0].event === 'burger' ||
-      this.props.allItems[0][1][0].event === 'cocktail'
+      this.state.items[0][1][0].event === 'burger' ||
+      this.state.items[0][1][0].event === 'cocktail'
     ) {
       return (
         <div>
@@ -33,6 +34,7 @@ class Items extends Component {
                 </h2>
                 <p>{item[1][0].description}</p>
                 <br />
+                <h2 className='item-name green-text'>Open till 9pm</h2>
                 <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                 <div className='list-bottom'>
@@ -75,6 +77,9 @@ class Items extends Component {
                       {item[1][0].dishes[2].course3_type}
                     </h2>
                     <p>{item[1][0].dishes[2].course3}</p>
+                    <br />
+                    <h2 className='item-name green-text'>Open till 9pm</h2>
+                    <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                     <div className='list-bottom'>
                       <a href={'http://' + item[0].website}>
@@ -106,6 +111,9 @@ class Items extends Component {
                       {item[1][0].dishes[1].course2_type}
                     </h2>
                     <p>{item[1][0].dishes[1].course2}</p>
+                    <br />
+                    <h2 className='item-name green-text'>Open till 9pm</h2>
+                    <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                     <div className='list-bottom'>
                       <a href={'http://' + item[0].website}>
