@@ -97,7 +97,7 @@ class Woapdata extends Component {
       return <div>Loading...</div>
     } else {
       if (!this.state.pageChange) {
-        currentMapState = false;
+        // currentMapState = false;
         
         return (
           <div>
@@ -106,10 +106,10 @@ class Woapdata extends Component {
           </div>
         )
       } else if (this.state.pageChange) {
-        currentMapState = true;
+        // currentMapState = true;
         return (
           <div>
-            <MapContainer {...this.state} />
+            <MapContainer />
           </div>
         )
           
