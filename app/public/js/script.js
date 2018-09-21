@@ -1,3 +1,5 @@
+// import { log } from "util";
+
 // Close modal if user clicks outside of it
 
 ;(function () {
@@ -27,3 +29,45 @@
 
 // xhttp.open("GET", "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Apache%20Wellington&inputtype=textquery&fields=opening_hours,geometry&key=AIzaSyDK1LL8OIe3T_SZ6WT3U3mtCSALXXD0xaQ", true);
 // xhttp.send();
+
+// function createCORSRequest(method, url) {
+//   var xhr = new XMLHttpRequest();
+//   if ('withCredentials' in xhr) {
+//     xhr.open(method, url, true)
+//   } else if (typeof XDomainRequest != 'undefined') {
+//     xhr = new XDomainRequest()
+//     xhr.open(method, url)
+//   } else {
+//     xhr = null
+//   }
+//   return xhr
+// }
+
+// function getTitle(text) {
+//   return text.match('<title>(.*)?</title>')[1]
+// }
+
+// function makeCorsRequest() {
+//   var url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Apache%20Wellington&inputtype=textquery&fields=opening_hours,geometry&key=AIzaSyDK1LL8OIe3T_SZ6WT3U3mtCSALXXD0xaQ'
+//   var xhr = createCORSRequest('GET', url)
+//   if (!xhr) {
+//     alert('CORS not supported')
+//     return
+//   }
+  
+//   xhr.onload = function() {
+//     var text = xhr.responseText
+//     var title = getTitle(text)
+//     console.log('Response for CORS request to ' + url + ' ' + title);
+//   }
+  
+//   xhr.onerror = function() {
+//     console.log('error');
+//   }
+
+//   xhr.send()
+// }
+
+
+  
+

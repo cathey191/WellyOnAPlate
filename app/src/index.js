@@ -14,6 +14,7 @@ class App extends Component {
       nextIcon: 'icons/Map.png',
       sort: ['Alphabetical', 'Price Low to High', 'Price High to Low'],
       current: 'burger',
+      places: '',
       type: 'Protein',
       sortBy: 'Alphabetical',
       optionChosen: '',

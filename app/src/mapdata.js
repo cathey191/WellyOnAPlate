@@ -9,8 +9,8 @@ export class MapContainer extends Component {
     }
   }
   render() {
+    console.log(this.props.items);
     for (let i = 0; i < this.props.items.length; i++) {
-      console.log(this.props.items[i][0].address1);
     }
       
       
@@ -24,8 +24,15 @@ export class MapContainer extends Component {
         lat: -41.286461,
         lng: 174.776230
       }}
-      />
-      
+      >
+      {/* {this.props.items.map((place, i) => (
+        <Marker
+        title={'The marker`s title will appear as a tooltip.'}
+        name={'SOMA'}
+        position={{lat: -41.286461, lng: 174.776230}} />
+        ))} */}
+
+      </Map>
     );
   }
 }

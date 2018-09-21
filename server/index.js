@@ -4,6 +4,7 @@ const https = require('https')
 const woap = require('./data/woap.json')
 
 const app = express()
+const key = 'AIzaSyDK1LL8OIe3T_SZ6WT3U3mtCSALXXD0xaQ'
 
 app.use(cors())
 
@@ -20,6 +21,7 @@ app.get('/allProducts', function (req, res) {
       res.json(removeFalse(woapData))
     }
   }
+  getPlaceId(woapData)
 })
 
 app.get('/dine', function (req, res) {
@@ -30,6 +32,7 @@ app.get('/dine', function (req, res) {
       res.json(removeFalse(woapData))
     }
   }
+  getPlaceId(woapData)
 })
 
 app.get('/burger', function (req, res) {
@@ -303,6 +306,83 @@ function removeSymbol (item) {
     item = item.substr(1)
   }
   return item
+}
+
+
+// DANTON 
+function getPlaceId (array) {
+  // console.log(array[0][0].company);
+  // console.log(array[0][1]);
+  // console.log(array[1][0]);
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === false){
+      
+    }
+    
+  }
+  
+  var noFalseArray = []
+  var id = []
+  for (var i = 0; i < array.length; i++) {
+    // console.log(array[i]);
+    
+    if (array[i] === false){
+      // console.log(array[i]);
+      array.splice(i, 1)
+      // console.log(array[i]);
+    } else if (array[i] !== false) {
+      noFalseArray.push(array[i])
+    }
+    
+  }
+
+  // for (let i = 0; i < 30; i++) {
+  //   var el = noFalseArray[i][0].address1;
+  //   // console.log(noFalseArray[i]);
+
+  //   el = el.split('%').join('')
+  //   var spaceName = el.split(' ').join('%20')
+  //   let body = ''
+  //   console.log(spaceName);
+
+    
+  //   https.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + spaceName + '%20wellington,%20New%20Zealand&inputtype=textquery&key=' + key, function (res) {
+  //     res.on('data', function (chunk) {
+  //       // console.log(res);
+  //       // console.log(i);
+        
+  //        var chunkInfo = chunk.toString();
+  //        var chunkInfoJson = JSON.parse(chunkInfo);
+  //        console.log(noFalseArray[i][0].company);
+         
+  //        id.push(chunkInfoJson.candidates[0].place_id)
+         
+  //       //  console.log(typeof chunkInfo);
+         
+        
+        
+  //       body += chunk.toString()
+  //     })
+  //     res.on('end', () => {
+  //       // id.push(body)
+  //       if (noFalseArray.length === id.length) {
+  //         var newArray = []
+  //         newArray.push(noFalseArray)
+  //         newArray.push(id)
+  //         // console.log(newArray)
+  //         return newArray
+  //       }
+  //     }).on('error', (e) =>{
+  //       // console.log(e.message);
+        
+  //     })
+  //   })
+    
+  // }
+  // console.log(id);
+  
+
+
 }
 
 

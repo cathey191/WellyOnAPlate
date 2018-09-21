@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Items from './items.js'
 import MapContainer from './mapdata.js'
+import { log } from 'util';
 
 class Woapdata extends Component {
   constructor (props) {
@@ -33,9 +34,11 @@ class Woapdata extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    console.log(nextProps);
+    
     if (nextProps.current !== this.state.currentState) {
       this.setState({ currentState: nextProps.current })
-      fetch('http://192.168.33.10:5000/' + nextProps.current)
+      fetch('http://192.168.33.10:5000/' + nextProps.current + nextProps.places)
         .then(res => res.json())
         .then(
           result => {
