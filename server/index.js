@@ -24,6 +24,7 @@ app.get('/allProducts', function (req, res) {
     }
   }
   getPlaceId(woapData)
+  console.log(arrayWithId);
   
 })
 
@@ -314,12 +315,12 @@ function removeSymbol (item) {
 }
 
 // DANTON
+var arrayWithId = []
 function getPlaceId (array) {
   for (let i = 0; i < array.length; i++) {
     if (array[i] === false) {
     }
   }
-  var arrayWithId = []
 
   for (let i = 0; i < 5; i++) {
     if (array[i] === false) {
@@ -351,28 +352,28 @@ function getPlaceId (array) {
             }
             var obj = {id: chunkInfoJson.candidates[0].place_id};
             array[i].push(obj)
-            console.log(array[i]);
+            // console.log(array[i]);
             
             arrayWithId.push(array[i])
-            return(arrayWithId[i])
+            return(arrayWithId)
           })
           res.on('end', () => {
-            
+
           })
         }
       )
     } // if else end
   } // for loop end
   
-  console.log(arrayWithId);
   
   // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ5dJAayuuOG0RODN2aHAHYok&fields=name,opening_hours&key=' + key, function (res){
-  //   res.on('data', function (chunk){
-  //     console.log(chunk.toString());
-  //   })
-  // })
+    //   res.on('data', function (chunk){
+      //     console.log(chunk.toString());
+      //   })
+      // })
+      
+    } // *** GETPLACE ID END ***
 
-} // *** GETPLACE ID END ***
 
 app.set('port', process.env.PORT || 5000)
 app.listen(app.get('port'), function () {
