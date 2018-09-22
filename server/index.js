@@ -336,50 +336,58 @@ function getPlaceId (array) {
     
   }
 
-  // for (let i = 0; i < 30; i++) {
-  //   var el = noFalseArray[i][0].address1;
-  //   // console.log(noFalseArray[i]);
+  for (let i = 0; i < 30; i++) {
+    var el = noFalseArray[i][0].company;
+    // console.log(noFalseArray[i]);
 
-  //   el = el.split('%').join('')
-  //   var spaceName = el.split(' ').join('%20')
-  //   let body = ''
-  //   console.log(spaceName);
+    el = el.split('%').join('')
+    var spaceName = el.split(' ').join('%20')
+    let body = ''
+    console.log(spaceName);
 
     
-  //   https.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + spaceName + '%20wellington,%20New%20Zealand&inputtype=textquery&key=' + key, function (res) {
-  //     res.on('data', function (chunk) {
-  //       // console.log(res);
-  //       // console.log(i);
+    https.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + spaceName + '%20wellington,%20New%20Zealand&inputtype=textquery&key=' + key, function (res) {
+      res.on('data', function (chunk) {
+        // console.log(i);
         
-  //        var chunkInfo = chunk.toString();
-  //        var chunkInfoJson = JSON.parse(chunkInfo);
-  //        console.log(noFalseArray[i][0].company);
+        var chunkInfo = chunk.toString();
+        var chunkInfoJson = JSON.parse(chunkInfo);
+        console.log(noFalseArray[i]);
+        
+        // console.log(res);
+        console.log(chunkInfoJson.candidates);
+        //  id.push(chunkInfoJson.candidates[0].place_id)
          
-  //        id.push(chunkInfoJson.candidates[0].place_id)
-         
-  //       //  console.log(typeof chunkInfo);
+        //  console.log(typeof chunkInfo);
          
         
         
-  //       body += chunk.toString()
-  //     })
-  //     res.on('end', () => {
-  //       // id.push(body)
-  //       if (noFalseArray.length === id.length) {
-  //         var newArray = []
-  //         newArray.push(noFalseArray)
-  //         newArray.push(id)
-  //         // console.log(newArray)
-  //         return newArray
-  //       }
-  //     }).on('error', (e) =>{
-  //       // console.log(e.message);
+        body += chunk.toString()
+      })
+      res.on('end', () => {
+        // id.push(body)
+        if (noFalseArray.length === id.length) {
+          var newArray = []
+          newArray.push(noFalseArray)
+          newArray.push(id)
+          // console.log(newArray)
+          return newArray
+        }
+      }).on('error', (e) =>{
+        // console.log(e.message);
         
-  //     })
+      })
+    })
+    
+  }
+
+  // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ41LdS8WvOG0RwEoyTpUlH5g&fields=name,opening_hours&key=' + key, function (res){
+  //   res.on('data', function (chunk){
+  //     console.log(chunk.toString());
+      
   //   })
-    
-  // }
-  // console.log(id);
+  // }) 
+  // console.log(noFalseArray);
   
 
 
