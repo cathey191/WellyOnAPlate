@@ -23,8 +23,7 @@ app.get('/allProducts', function (req, res) {
       res.json(removeFalse(woapData))
     }
   }
-  getPlaceId(woapData)
-  console.log(arrayWithId);
+  
   
 })
 
@@ -305,6 +304,9 @@ function removeFalse (array) {
       return newArray
     }
   }
+  getPlaceId(array)
+  console.log(arrayWithId);
+  
 }
 
 function removeSymbol (item) {
