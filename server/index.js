@@ -24,6 +24,7 @@ app.get('/allProducts', function (req, res) {
     }
   }
   getPlaceId(woapData)
+  
 })
 
 app.get('/dine', function (req, res) {
@@ -318,7 +319,7 @@ function getPlaceId (array) {
     if (array[i] === false) {
     }
   }
-  var id = []
+  var arrayWithId = []
 
   for (let i = 0; i < 5; i++) {
     if (array[i] === false) {
@@ -343,27 +344,28 @@ function getPlaceId (array) {
           key,
         function (res) {
           res.on('data', function (chunk) {
+            
             var chunkInfo = chunk.toString()
             var chunkInfoJson = JSON.parse(chunkInfo)
             if (chunkInfoJson.candidates[0] === undefined) {
             }
-            console.log(array[i][0].company)
-            console.log(chunkInfoJson.candidates[0].place_id)
-
-            // //   res.on('end', () => {
-            // //     if (noFalseArray.length === id.length) {
-            // //       var newArray = []
-            // //       newArray.push(noFalseArray)
-            // //       newArray.push(id)
-            // //       return newArray
-            // //     }
-            // //   }).on('error', (e) =>{
+            var obj = {id: chunkInfoJson.candidates[0].place_id};
+            array[i].push(obj)
+            console.log(array[i]);
+            
+            arrayWithId.push(array[i])
+            return(arrayWithId[i])
+          })
+          res.on('end', () => {
+            
           })
         }
       )
     } // if else end
   } // for loop end
-
+  
+  console.log(arrayWithId);
+  
   // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ5dJAayuuOG0RODN2aHAHYok&fields=name,opening_hours&key=' + key, function (res){
   //   res.on('data', function (chunk){
   //     console.log(chunk.toString());
