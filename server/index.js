@@ -2,9 +2,11 @@ const express = require('express')
 const cors = require('cors')
 const https = require('https')
 const woap = require('./data/woap.json')
+const config = require('./config.json')
 
 const app = express()
-const key = 'AIzaSyDK1LL8OIe3T_SZ6WT3U3mtCSALXXD0xaQ'
+const key = config[0].API_KEY
+
 
 app.use(cors())
 
@@ -43,6 +45,7 @@ app.get('/burger', function (req, res) {
       res.json(removeFalse(woapData))
     }
   }
+  getPlaceId(woapData)
 })
 
 app.get('/cocktail', function (req, res) {
@@ -53,6 +56,7 @@ app.get('/cocktail', function (req, res) {
       res.json(removeFalse(woapData))
     }
   }
+  getPlaceId(woapData)
 })
 
 app.get('/dine/type:type', function (req, res) {
@@ -308,93 +312,65 @@ function removeSymbol (item) {
   return item
 }
 
-
-// DANTON 
+// DANTON
 function getPlaceId (array) {
-  // console.log(array[0][0].company);
-  // console.log(array[0][1]);
-  // console.log(array[1][0]);
   for (let i = 0; i < array.length; i++) {
-    if (array[i] === false){
-      
+    if (array[i] === false) {
     }
-    
   }
-  
-  var noFalseArray = []
   var id = []
-  for (var i = 0; i < array.length; i++) {
-    // console.log(array[i]);
-    
-    if (array[i] === false){
-      // console.log(array[i]);
-      array.splice(i, 1)
-      // console.log(array[i]);
-    } else if (array[i] !== false) {
-      noFalseArray.push(array[i])
-    }
-    
-  }
 
-  for (let i = 0; i < 30; i++) {
-    var el = noFalseArray[i][0].company;
-    // console.log(noFalseArray[i]);
+  for (let i = 0; i < 5; i++) {
+    if (array[i] === false) {
 
-    el = el.split('%').join('')
-    var spaceName = el.split(' ').join('%20')
-    let body = ''
-    console.log(spaceName);
+    } else {
+      var el = array[i][0].company
 
-    
-    https.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + spaceName + '%20wellington,%20New%20Zealand&inputtype=textquery&key=' + key, function (res) {
-      res.on('data', function (chunk) {
-        // console.log(i);
-        
-        var chunkInfo = chunk.toString();
-        var chunkInfoJson = JSON.parse(chunkInfo);
-        console.log(noFalseArray[i]);
-        
-        // console.log(res);
-        console.log(chunkInfoJson.candidates);
-        //  id.push(chunkInfoJson.candidates[0].place_id)
-         
-        //  console.log(typeof chunkInfo);
-         
-        
-        
-        body += chunk.toString()
-      })
-      res.on('end', () => {
-        // id.push(body)
-        if (noFalseArray.length === id.length) {
-          var newArray = []
-          newArray.push(noFalseArray)
-          newArray.push(id)
-          // console.log(newArray)
-          return newArray
+      el = el.split('&').join('and')
+      el = el.split('é').join('e')
+      el = el.split('è').join('e')
+      el = el.split('ā').join('a')
+      el = el.split('ō').join('o')
+      el = el.split('ï').join('i')
+      el = el.split('ü').join('u')
+      var spaceName = el.split(' ').join('%20')
+      let body = ''
+
+      https.get(
+        'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' +
+          spaceName +
+          '%20wellington,%20New%20Zealand&inputtype=textquery&key=' +
+          key,
+        function (res) {
+          res.on('data', function (chunk) {
+            var chunkInfo = chunk.toString()
+            var chunkInfoJson = JSON.parse(chunkInfo)
+            if (chunkInfoJson.candidates[0] === undefined) {
+            }
+            console.log(array[i][0].company)
+            console.log(chunkInfoJson.candidates[0].place_id)
+
+            // //   res.on('end', () => {
+            // //     if (noFalseArray.length === id.length) {
+            // //       var newArray = []
+            // //       newArray.push(noFalseArray)
+            // //       newArray.push(id)
+            // //       return newArray
+            // //     }
+            // //   }).on('error', (e) =>{
+          })
         }
-      }).on('error', (e) =>{
-        // console.log(e.message);
-        
-      })
-    })
-    
-  }
+      )
+    } // if else end
+  } // for loop end
 
-  // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ41LdS8WvOG0RwEoyTpUlH5g&fields=name,opening_hours&key=' + key, function (res){
+  // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ5dJAayuuOG0RODN2aHAHYok&fields=name,opening_hours&key=' + key, function (res){
   //   res.on('data', function (chunk){
   //     console.log(chunk.toString());
-      
   //   })
-  // }) 
-  // console.log(noFalseArray);
-  
+  // })
 
-
-}
-
-
-
+} // *** GETPLACE ID END ***
 
 app.set('port', process.env.PORT || 5000)
 app.listen(app.get('port'), function () {
