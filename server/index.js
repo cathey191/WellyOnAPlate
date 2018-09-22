@@ -7,7 +7,6 @@ const config = require('./config.json')
 const app = express()
 const key = config[0].API_KEY
 
-
 app.use(cors())
 
 app.use(function (req, res, next) {
@@ -20,12 +19,12 @@ app.get('/allProducts', function (req, res) {
   for (var i = 0; i < woap.venues.length; i++) {
     woapData.push(eventData(woap.venues[i]))
     if (woap.venues.length === i + 1) {
-      res.json(removeFalse(woapData))
+      var removed = removeFalse(woapData)
+      var withKeys = getPlaceId(removed) // Error here with timing. It isn't waiting for return before starting next stage
+      console.log(withKeys);
+      res.json(withKeys)
     }
   }
-  getPlaceId(woapData)
-  console.log(arrayWithId);
-  
 })
 
 app.get('/dine', function (req, res) {
@@ -315,16 +314,11 @@ function removeSymbol (item) {
 }
 
 // DANTON
-var arrayWithId = []
 function getPlaceId (array) {
+  var arrayWithId = []
   for (let i = 0; i < array.length; i++) {
     if (array[i] === false) {
-    }
-  }
-
-  for (let i = 0; i < 5; i++) {
-    if (array[i] === false) {
-
+      console.log('fail')
     } else {
       var el = array[i][0].company
 
@@ -336,7 +330,6 @@ function getPlaceId (array) {
       el = el.split('ï').join('i')
       el = el.split('ü').join('u')
       var spaceName = el.split(' ').join('%20')
-      let body = ''
 
       https.get(
         'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' +
@@ -345,35 +338,30 @@ function getPlaceId (array) {
           key,
         function (res) {
           res.on('data', function (chunk) {
-            
             var chunkInfo = chunk.toString()
             var chunkInfoJson = JSON.parse(chunkInfo)
-            if (chunkInfoJson.candidates[0] === undefined) {
+            var obj = { id: false }
+            if (chunkInfoJson.candidates[0] !== undefined) {
+              obj = { id: chunkInfoJson.candidates[0].place_id }
             }
-            var obj = {id: chunkInfoJson.candidates[0].place_id};
             array[i].push(obj)
-            // console.log(array[i]);
-            
             arrayWithId.push(array[i])
-            return(arrayWithId)
           })
-          res.on('end', () => {
-
-          })
+          if (array.length - 1 === arrayWithId.length) {
+            console.log('pass');
+            return arrayWithId
+          }
         }
       )
     } // if else end
   } // for loop end
-  
-  
-  // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ5dJAayuuOG0RODN2aHAHYok&fields=name,opening_hours&key=' + key, function (res){
-    //   res.on('data', function (chunk){
-      //     console.log(chunk.toString());
-      //   })
-      // })
-      
-    } // *** GETPLACE ID END ***
 
+  // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ5dJAayuuOG0RODN2aHAHYok&fields=name,opening_hours&key=' + key, function (res){
+  //   res.on('data', function (chunk){
+  //     console.log(chunk.toString());
+  //   })
+  // })
+} // *** GETPLACE ID END ***
 
 app.set('port', process.env.PORT || 5000)
 app.listen(app.get('port'), function () {
