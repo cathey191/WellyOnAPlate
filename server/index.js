@@ -8,6 +8,7 @@ const app = express()
 const key = config[0].API_KEY
 
 app.use(cors())
+app.set('json spaces', 2)
 
 app.use(function (req, res, next) {
   console.log(`${req.method} request for ${req.url}`)
@@ -19,10 +20,7 @@ app.get('/allProducts', function (req, res) {
   for (var i = 0; i < woap.venues.length; i++) {
     woapData.push(eventData(woap.venues[i]))
     if (woap.venues.length === i + 1) {
-      var removed = removeFalse(woapData)
-      var withKeys = getPlaceId(removed) // Error here with timing. It isn't waiting for return before starting next stage
-      console.log(withKeys);
-      res.json(withKeys)
+      removeFalse(woapData, res)
     }
   }
 })
@@ -32,7 +30,7 @@ app.get('/dine', function (req, res) {
   for (var i = 0; i < woap.venues.length; i++) {
     woapData.push(getDine(woap.venues[i]))
     if (woap.venues.length === i + 1) {
-      res.json(removeFalse(woapData))
+      removeFalse(woapData, res)
     }
   }
   getPlaceId(woapData)
@@ -43,7 +41,7 @@ app.get('/burger', function (req, res) {
   for (var i = 0; i < woap.venues.length; i++) {
     woapData.push(getBurger(woap.venues[i]))
     if (woap.venues.length === i + 1) {
-      res.json(removeFalse(woapData))
+      removeFalse(woapData, res)
     }
   }
   getPlaceId(woapData)
@@ -54,7 +52,7 @@ app.get('/cocktail', function (req, res) {
   for (var i = 0; i < woap.venues.length; i++) {
     woapData.push(getCocktail(woap.venues[i]))
     if (woap.venues.length === i + 1) {
-      res.json(removeFalse(woapData))
+      removeFalse(woapData, res)
     }
   }
   getPlaceId(woapData)
@@ -80,7 +78,7 @@ app.get('/dine/type:type', function (req, res) {
       }
     }
     if (woap.venues.length === i + 1) {
-      res.json(removeFalse(woapData))
+      removeFalse(woapData, res)
     }
   }
 })
@@ -98,7 +96,7 @@ app.get('/burger/type:type', function (req, res) {
       }
     }
     if (woap.venues.length === i + 1) {
-      res.json(removeFalse(woapData))
+      removeFalse(woapData, res)
     }
   }
 })
@@ -114,7 +112,7 @@ app.get('/cocktail/type:type', function (req, res) {
       }
     }
     if (woap.venues.length === i + 1) {
-      res.json(removeFalse(woapData))
+      removeFalse(woapData, res)
     }
   }
 })
@@ -294,14 +292,14 @@ function dineData (data) {
   return dine
 }
 
-function removeFalse (array) {
+function removeFalse (array, responce) {
   var newArray = []
   for (var i = 0; i < array.length; i++) {
     if (typeof array[i][1] === 'object' && array[i][1].length >= 1) {
       newArray.push(array[i])
     }
     if (array.length === i + 1) {
-      return newArray
+      getPlaceId(newArray, responce)
     }
   }
 }
@@ -313,8 +311,7 @@ function removeSymbol (item) {
   return item
 }
 
-// DANTON
-function getPlaceId (array) {
+function getPlaceId (array, responce) {
   var arrayWithId = []
   for (let i = 0; i < array.length; i++) {
     if (array[i] === false) {
@@ -334,33 +331,28 @@ function getPlaceId (array) {
       https.get(
         'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' +
           spaceName +
-          '%20wellington,%20New%20Zealand&inputtype=textquery&key=' +
+          '%20wellington,%20New%20Zealand&inputtype=textquery&fields=opening_hours&key=' +
           key,
         function (res) {
           res.on('data', function (chunk) {
             var chunkInfo = chunk.toString()
             var chunkInfoJson = JSON.parse(chunkInfo)
-            var obj = { id: false }
-            if (chunkInfoJson.candidates[0] !== undefined) {
-              obj = { id: chunkInfoJson.candidates[0].place_id }
+            var obj = { 'open': 'Unknown' }
+            if (chunkInfoJson.candidates[0] !== undefined && chunkInfoJson.candidates[0].opening_hours !== undefined) {
+              obj = { 'open': chunkInfoJson.candidates[0].opening_hours.open_now }
             }
             array[i].push(obj)
             arrayWithId.push(array[i])
+
+            if (array.length === arrayWithId.length) {
+              var arrayToSend = JSON.stringify(arrayWithId)
+              responce.json(arrayToSend)
+            }
           })
-          if (array.length - 1 === arrayWithId.length) {
-            console.log('pass');
-            return arrayWithId
-          }
         }
       )
     } // if else end
   } // for loop end
-
-  // https.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ5dJAayuuOG0RODN2aHAHYok&fields=name,opening_hours&key=' + key, function (res){
-  //   res.on('data', function (chunk){
-  //     console.log(chunk.toString());
-  //   })
-  // })
 } // *** GETPLACE ID END ***
 
 app.set('port', process.env.PORT || 5000)
