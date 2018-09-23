@@ -19,15 +19,17 @@ export class MapContainer extends Component {
     this.createMap = this.createMap.bind(this)
   }
 
+  componentDidMount(){
+    var locations = this.getLocations()
+    console.log(locations.length);
 
+  }
 
   render() {
     
-    var locations = this.getLocations()
     
     
 
-    // console.log(this.locationArray);
     
     return(
       <div>
@@ -40,13 +42,13 @@ export class MapContainer extends Component {
             lng: 174.776230
           }}
           >
-          {locations.map((locations, i)=>
+          {/* {locations.map((locations, i)=>
             <Marker
               key = {i}
               name={'Name'}
               position={locations}
             />
-          )}
+          )} */}
         </Map>
           
 
@@ -69,8 +71,8 @@ export class MapContainer extends Component {
           // var lat = response.results[0].geometry.location.lat
           // var lng = response.results[0].geometry.location.lng
           var {lat, lng} = response.results[0].geometry.location
-          locations.push({lat: lat})
-          locations.push({lng: lng})
+          locations.push('text')
+          // locations.push({lng: lng})
           
           // if (i + 1 === this.props.items.length){
           //   locations.push(lat, lng)
