@@ -1,10 +1,9 @@
 const express = require('express')
 const cors = require('cors')
-const https = require('https')
 const woap = require('./data/woap.json')
-const googleAPI = require('./config.json')
 
-var key = googleAPI[0].googleAPI
+var date = new Date()
+var today = date.getDay()
 
 const app = express()
 
@@ -121,7 +120,8 @@ function eventData (woapLocations) {
       company: woapLocations.Venue.title,
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
-      website: woapLocations.Venue.website
+      website: woapLocations.Venue.website,
+      hours: woapLocations.Venue.open_hours_Mon
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -175,7 +175,8 @@ function getDine (woapLocations) {
       company: woapLocations.Venue.title,
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
-      website: woapLocations.Venue.website
+      website: woapLocations.Venue.website,
+      hours: woapLocations.Venue.open_hours_Mon
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -207,7 +208,8 @@ function getBurger (woapLocations) {
       company: woapLocations.Venue.title,
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
-      website: woapLocations.Venue.website
+      website: woapLocations.Venue.website,
+      hours: woapLocations.Venue.open_hours_Mon
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -236,7 +238,8 @@ function getCocktail (woapLocations) {
       company: woapLocations.Venue.title,
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
-      website: woapLocations.Venue.website
+      website: woapLocations.Venue.website,
+      hours: woapLocations.Venue.open_hours_Mon
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -296,7 +299,7 @@ function removeFalse (array) {
       newArray.push(array[i])
     }
     if (array.length === i + 1) {
-      return getPlaceId(newArray)
+      return newArray
     }
   }
 }
@@ -306,29 +309,6 @@ function removeSymbol (item) {
     item = item.substr(1)
   }
   return item
-}
-
-function getPlaceId (array) {
-  var id = []
-  for (var i = 0; i < array.length; i++) {
-    var spaceName = array[i][0].company.split(' ').join('%20')
-    let body = ''
-    https.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + spaceName + '%20wellington&inputtype=textquery&key=' + key, function (res) {
-      res.on('data', function (chunk) {
-        body += chunk.toString()
-      })
-      res.on('end', () => {
-        id.push(body)
-        if (array.length === id.length) {
-          var newArray = []
-          newArray.push(array)
-          newArray.push(id)
-          console.log(newArray.length)
-          return newArray
-        }
-      })
-    })
-  }
 }
 
 app.set('port', process.env.PORT || 5000)

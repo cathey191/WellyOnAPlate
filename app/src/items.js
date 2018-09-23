@@ -34,7 +34,7 @@ class Items extends Component {
                 </h2>
                 <p>{item[1][0].description}</p>
                 <br />
-                <h2 className='item-name green-text'>Open till 9pm</h2>
+                <h2 className='item-name green-text'>{item[0].hours}</h2>
                 <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                 <div className='list-bottom'>
