@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import key from './config.json';
+import Geocode from 'react-geocode'
+
+Geocode.setApiKey(key[0].API_KEY)
+// Geocode.enableDebug()
 
 export class MapContainer extends Component {
   constructor (props) {
@@ -8,11 +13,36 @@ export class MapContainer extends Component {
       
     }
   }
+
+
+
   render() {
-    console.log(this.props.items);
+    var locations = [];
     for (let i = 0; i < this.props.items.length; i++) {
+      const el = this.props.items[i];
+      Geocode.fromAddress(el["0"].address1).then(
+        response => {
+          const {lat, lng} = response.results[0].geometry.location
+          pushToArray(lat, lng)
+        },
+        error => {
+          // console.log(error);
+          
+        }
+          
+      )
+    }
+    console.log(locations);
+    
+
+    function pushToArray(lat, lng){
+      locations.push(lat, lng)
     }
       
+    
+
+    for (let i = 0; i < this.props.items.length; i++) {
+    }
       
     
     return (
@@ -25,10 +55,10 @@ export class MapContainer extends Component {
         lng: 174.776230
       }}
       >
-      {/* {this.props.items.map((place, i) => (
+      {/* {this.props.items.map((item, i) => (
         <Marker
-        title={'The marker`s title will appear as a tooltip.'}
-        name={'SOMA'}
+        title={item["0"]["0"].company}
+        name={item["0"]["0"].company}
         position={{lat: -41.286461, lng: 174.776230}} />
         ))} */}
 
@@ -38,5 +68,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyDK1LL8OIe3T_SZ6WT3U3mtCSALXXD0xaQ')
+  apiKey: (key[0].API_KEY)
 })(MapContainer)

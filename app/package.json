@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "google-maps-react": "^2.0.2",
+    "react-geocode": "^0.1.2",
     "react-scripts": "1.1.5"
   },
   "scripts": {
