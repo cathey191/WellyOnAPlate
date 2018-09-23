@@ -295,7 +295,7 @@ function dineData (data) {
 function removeFalse (array, responce) {
   var newArray = []
   for (var i = 0; i < array.length; i++) {
-    if (typeof array[i][1] === 'object' && array[i][1].length >= 1) {
+    if (array[i] !== false && typeof array[i][1] === 'object' && array[i][1].length >= 1) {
       newArray.push(array[i])
     }
     if (array.length === i + 1) {
@@ -315,7 +315,6 @@ function getPlaceId (array, responce) {
   var arrayWithId = []
   for (let i = 0; i < array.length; i++) {
     if (array[i] === false) {
-      console.log('fail')
     } else {
       var el = array[i][0].company
 
@@ -345,8 +344,7 @@ function getPlaceId (array, responce) {
             arrayWithId.push(array[i])
 
             if (array.length === arrayWithId.length) {
-              var arrayToSend = JSON.stringify(arrayWithId)
-              responce.json(arrayToSend)
+              responce.json(arrayWithId)
             }
           })
         }
