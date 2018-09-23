@@ -2,9 +2,6 @@ const express = require('express')
 const cors = require('cors')
 const woap = require('./data/woap.json')
 
-var date = new Date()
-var today = date.getDay()
-
 const app = express()
 
 app.use(cors())
@@ -121,7 +118,7 @@ function eventData (woapLocations) {
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
       website: woapLocations.Venue.website,
-      hours: woapLocations.Venue.open_hours_Mon
+      hours: getHours(woapLocations)
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -176,7 +173,7 @@ function getDine (woapLocations) {
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
       website: woapLocations.Venue.website,
-      hours: woapLocations.Venue.open_hours_Mon
+      hours: getHours(woapLocations)
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -209,7 +206,7 @@ function getBurger (woapLocations) {
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
       website: woapLocations.Venue.website,
-      hours: woapLocations.Venue.open_hours_Mon
+      hours: getHours(woapLocations)
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -239,7 +236,7 @@ function getCocktail (woapLocations) {
       address1: woapLocations.Venue.address1,
       suburb: woapLocations.Venue.suburb,
       website: woapLocations.Venue.website,
-      hours: woapLocations.Venue.open_hours_Mon
+      hours: getHours(woapLocations)
     })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
@@ -290,6 +287,26 @@ function dineData (data) {
     })
   }
   return dine
+}
+
+function getHours (data) {
+  var d = new Date()
+  var weekday = new Array(7)
+  weekday[0] = 'open_hours__sun'
+  weekday[1] = 'open_hours__mon'
+  weekday[2] = 'open_hours__tue'
+  weekday[3] = 'open_hours__wed'
+  weekday[4] = 'open_hours__thu'
+  weekday[5] = 'open_hours__fri'
+  weekday[6] = 'open_hours__sat'
+
+  var hours = data.Venue[weekday[d.getDay()]]
+
+  if (hours === '' || hours === 'n/a') {
+    hours = 'Closed'
+  }
+
+  return hours
 }
 
 function removeFalse (array) {

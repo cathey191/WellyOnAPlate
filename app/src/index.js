@@ -248,8 +248,6 @@ class App extends Component {
   }
 
   mapChangeHandler (e) {
-    console.log('working')
-
     this.setState({
       currentMapState: true
     })
