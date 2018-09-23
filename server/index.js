@@ -303,7 +303,7 @@ function getHours (data) {
   var hours = data.Venue[weekday[d.getDay()]]
 
   if (hours === '' || hours === 'n/a') {
-    hours = 'Unknown'
+    hours = 'Hours are unavailable'
   }
 
   return hours
