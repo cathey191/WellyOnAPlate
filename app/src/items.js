@@ -10,6 +10,12 @@ class Items extends Component {
   }
 
   render () {
+    var icon
+    if (this.props.items[0][1][0].event === 'burger') {
+      icon = './icons/hamburger-meal.png'
+    } else if (this.props.items[0][1][0].event === 'cocktail') {
+      icon = './icons/cocktail.png'
+    }
     if (
       this.props.items[0][1][0].event === 'burger' ||
       this.props.items[0][1][0].event === 'cocktail'
@@ -25,7 +31,7 @@ class Items extends Component {
                 </h1>
                 <h2 className='item-name'>
                   <img
-                    src='./icons/hamburger-meal.png'
+                    src={icon}
                     alt=''
                     className='icon-small'
                   />
