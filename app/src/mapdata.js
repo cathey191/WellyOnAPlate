@@ -20,6 +20,7 @@ export class MapContainer extends Component {
     }
     this.getLocations = this.getLocations.bind(this)
     this.onMarkerClick = this.onMarkerClick.bind(this)
+    this.onMapClicked = this.onMapClicked.bind(this)
   }
 
   componentDidMount () {
@@ -56,7 +57,7 @@ export class MapContainer extends Component {
               position={{ lat: marker.lat, lng: marker.lng }}
               />
               ))}
-              <InfoWindow>
+              <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}><div><h1>{this.state.selectedPlace.name}</h1></div>
               </InfoWindow>
@@ -70,11 +71,11 @@ export class MapContainer extends Component {
     console.log(e);
     console.log(props);
     console.log(marker);
-    // this.setState({
-    //   selectedPlace: props,
-    //   activeMarker: marker,
-    //   showingInfoWindow: true
-    // })
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    })
     
   }
 
