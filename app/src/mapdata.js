@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+ import React, { Component } from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import key from './config.json';
 import Geocode from 'react-geocode'
@@ -12,27 +12,22 @@ export class MapContainer extends Component {
     super(props)
     this.state = {
       itemsFromProps : this.props.items,
-      locationArray: []
+      locationArray: [],
+      text: 'text'
     }
-    this.createMap = this.createMap.bind(this)
     this.getLocations = this.getLocations.bind(this)
-    this.createMap = this.createMap.bind(this)
   }
 
   componentDidMount(){
-    var locations = this.getLocations()
-    console.log(locations.length);
+    this.getLocations()
+    console.log(this.locationArray);
+    
+    
+    
 
   }
 
   render() {
-    this.getLocations()
-    
-    
-    
-    
-
-    
     
     return(
       <div>
@@ -54,70 +49,62 @@ export class MapContainer extends Component {
           )} */}
         </Map>
       </div>
-          
-
-    )
-
-
-
-  }
-
-  getLocations(){    
-    let locations = [];
-    for (let i = 0; i < 10; i++) {
-      var el = this.props.items[i];
-      
-      Geocode.fromAddress(el["0"].address1 + ' Wellington, New Zealand').then(
-        response => {
-          // console.log(response.results[0].geometry.location.lat);
-          // console.log(response.results[0].geometry.location.lng);
-          // var lat = response.results[0].geometry.location.lat
-          // var lng = response.results[0].geometry.location.lng
-          var test = response.results[0].geometry.location
-          locations.push(test)
-          
-          if (i + 1 === 10){
-            // console.log(locations);
-            // console.log(locations.length);
-            this.createMap(locations)
-          }
-        },
-        error => {
-          // console.log(error);
-          
+          )
         }
           
-      )
-    }
-    
-
-  }
-
-  createMap(input){
-    console.log(input.length);
-    this.setState({
-      locationArray: input
-    })
-    
-  }
-    
-    
-
-    
-
+        getLocations(){   
+          console.log('running');
+           
+          let locations = [];
+          for (let i = 0; i < 10; i++) {
+            var el = this.props.items[i];
             
+            Geocode.fromAddress(el["0"].address1 + ' Wellington, New Zealand').then(
+              response => {
+                // console.log(response.results[0].geometry.location.lat);
+                // console.log(response.results[0].geometry.location.lng);
+                // var lat = response.results[0].geometry.location.lat
+                // var lng = response.results[0].geometry.location.lng
+                
+                var test = response.results[0].geometry.location
+                // console.log(test);
+                var joined = this.state.locationArray.concat(test)
+                // console.log(joined);
+                // locations.push(test)
+                this.setState({
+                  locationArray: joined
+                })
+                if (i + 1 === 10){
+                }
+              },
+              error => {
+                console.log(error);
+                
+              }
+                
+            )
+          }
+          
+          
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
 
-  // createMap(locations){
-  //   return (
-
-  //     this.props.items.map((item, i) => (
-  //       <Marker
-  //       title={item["0"]["0"].company}
-  //       name={item["0"]["0"].company}
-  //       position={{lat: -41.286461, lng: 174.776230}} />
-  //     ))
-  //   );
-  // }
 }
 
 export default GoogleApiWrapper({
