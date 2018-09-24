@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 import key from './config.json'
 import Geocode from 'react-geocode'
 
 Geocode.setApiKey(key[0].API_KEY)
-// Geocode.enableDebug()
 
 export class MapContainer extends Component {
   constructor (props) {
@@ -19,19 +18,10 @@ export class MapContainer extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props.items.length);
     this.getLocations()
-    
-  }
-  
-  componentDidUpdate(){
-    
   }
 
   render () {
-    console.log(this.props.items)
-
-    console.log(this.state.locationArray)
     const { isLoaded, locationArray } = this.state
     if (!isLoaded) {
       return <div>Loading...</div>
@@ -61,13 +51,10 @@ export class MapContainer extends Component {
   }
 
   getLocations () {
-    console.log('running')
-
     var locations = []
     var count = 0
-    for (let i = 0; i < this.props.items.length; i++) {
+    for (let i = 0; i < 15; i++) {
       var el = this.props.items[i]
-      // console.log(el);
 
       Geocode.fromAddress(el['0'].address1 + ' Wellington, New Zealand').then(
         response => {
@@ -81,7 +68,7 @@ export class MapContainer extends Component {
             lng: lng
           })
 
-          if (count === this.props.items.length) {
+          if (count === 15) {
             this.setState({
               locationArray: locations,
               isLoaded: true
