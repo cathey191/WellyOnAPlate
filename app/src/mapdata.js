@@ -30,13 +30,12 @@ export class MapContainer extends Component {
     if (nextProps.currentState !== this.state.current) {
       this.getLocations()
       this.setState({
-        current: this.props.current
+        current: nextProps.currentState
       })
     }
   }
-  
+
   render () {
-    console.log(this.state.locationArray);
     const { isLoaded, locationArray } = this.state
     if (!isLoaded) {
       return <div>Loading...</div>
@@ -76,15 +75,11 @@ export class MapContainer extends Component {
   }
 
   onMarkerClick(props, marker, e){
-    console.log(e);
-    console.log(props);
-    console.log(marker);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     })
-    
   }
 
   onMapClicked = (props) => {
@@ -99,21 +94,14 @@ export class MapContainer extends Component {
   getLocations () {
     var locations = []
     var count = 0
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < this.props.items.length; i++) {
       var el = this.props.items
-      
 
-
-      Geocode.fromAddress(el[i]['0'].address1 + ' Wellington, New Zealand').then(
+      Geocode.fromAddress(el[i][0].address1 + ' Wellington, New Zealand').then(
         response => {
           count++
           var lat = response.results[0].geometry.location.lat
           var lng = response.results[0].geometry.location.lng
-          // console.log(el);
-          console.log(i);
-          console.log(el[i]);
-          
-                    
 
           locations.push({
             title: el[i][0].company,
@@ -124,8 +112,7 @@ export class MapContainer extends Component {
             lng: lng
           })
 
-
-          if (count === 5) {
+          if (count === this.props.items.length) {
             this.setState({
               locationArray: locations,
               isLoaded: true
