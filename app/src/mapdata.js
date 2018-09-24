@@ -14,7 +14,7 @@ export class MapContainer extends Component {
       itemsFromProps : this.props.items,
       locationArray: []
     }
-    // this.createMap = this.createMap.bind(this)
+    this.createMap = this.createMap.bind(this)
     this.getLocations = this.getLocations.bind(this)
     this.createMap = this.createMap.bind(this)
   }
@@ -26,10 +26,13 @@ export class MapContainer extends Component {
   }
 
   render() {
+    this.getLocations()
+    
     
     
     
 
+    
     
     return(
       <div>
@@ -42,7 +45,7 @@ export class MapContainer extends Component {
             lng: 174.776230
           }}
           >
-          {/* {locations.map((locations, i)=>
+          {/* {this.locationsArray.map((locations, i)=>
             <Marker
               key = {i}
               name={'Name'}
@@ -50,16 +53,16 @@ export class MapContainer extends Component {
             />
           )} */}
         </Map>
+      </div>
           
 
-      </div>
     )
 
 
 
   }
 
-  getLocations(){
+  getLocations(){    
     let locations = [];
     for (let i = 0; i < 10; i++) {
       var el = this.props.items[i];
@@ -70,33 +73,31 @@ export class MapContainer extends Component {
           // console.log(response.results[0].geometry.location.lng);
           // var lat = response.results[0].geometry.location.lat
           // var lng = response.results[0].geometry.location.lng
-          var {lat, lng} = response.results[0].geometry.location
-          locations.push('text')
-          // locations.push({lng: lng})
+          var test = response.results[0].geometry.location
+          locations.push(test)
           
-          // if (i + 1 === this.props.items.length){
-          //   locations.push(lat, lng)
-          //   this.setState({
-          //     locationArray: locations
-          //   })
-          // }
+          if (i + 1 === 10){
+            // console.log(locations);
+            // console.log(locations.length);
+            this.createMap(locations)
+          }
         },
         error => {
-          console.log(error);
+          // console.log(error);
           
         }
           
       )
     }
-    this.createMap(locations)
-    return(locations)
+    
+
   }
 
   createMap(input){
-    console.log(input);
     console.log(input.length);
-    
-    console.log(input[0]);
+    this.setState({
+      locationArray: input
+    })
     
   }
     
