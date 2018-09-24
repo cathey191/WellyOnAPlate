@@ -25,6 +25,7 @@ export class MapContainer extends Component {
   componentWillMount () {
     this.getLocations()
   }
+  
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.currentState !== this.state.current) {
@@ -36,7 +37,6 @@ export class MapContainer extends Component {
   }
   
   render () {
-    console.log(this.state.locationArray);
     const { isLoaded, locationArray } = this.state
     if (!isLoaded) {
       return <div>Loading...</div>

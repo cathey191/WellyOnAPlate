@@ -139,6 +139,8 @@ class App extends Component {
     document.getElementById('filterForm')[0].checked = true
 
     if (event.target.value === 'cocktail') {
+      console.log(event.target.value);
+      
       window.scrollTo(0, 0)
       this.setState({
         current: 'cocktail',
@@ -150,6 +152,7 @@ class App extends Component {
         }
       })
     } else if (event.target.value === 'burger') {
+      console.log(event.target.value);
       window.scrollTo(0, 0)
       this.setState({
         current: 'burger',
@@ -168,6 +171,7 @@ class App extends Component {
         }
       })
     } else if (event.target.value === 'dine') {
+      console.log(event.target.value);
       window.scrollTo(0, 0)
       this.setState({
         current: 'dine',

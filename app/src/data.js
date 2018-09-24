@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Items from './items.js'
 import MapContainer from './mapdata.js'
+import { log } from 'util';
 
 class Woapdata extends Component {
   constructor (props) {
@@ -16,7 +17,7 @@ class Woapdata extends Component {
   }
 
   componentWillMount () {
-    fetch('http://localhost:5000/burger').then(res => res.json()).then(
+    fetch('http://192.168.33.10:5000/burger').then(res => res.json()).then(
       result => {
         this.setState({
           isLoaded: true,
@@ -31,19 +32,26 @@ class Woapdata extends Component {
       }
     )
   }
-
+  componentWillUpdate(){
+    // console.log(this.state.items);
+    
+  }
   componentWillReceiveProps (nextProps) {
+    
+    
     if (nextProps.current !== this.state.currentState) {
       this.setState({ currentState: nextProps.current })
-      fetch('http://localhost:5000/' + nextProps.current + nextProps.places)
+      fetch('http://192.168.33.10:5000/' + nextProps.current + nextProps.places)
         .then(res => res.json())
         .then(
           result => {
+            
             this.setState({
               isLoaded: true,
               items: result,
               pageChange: false
             })
+            console.log(this.items);
           },
           error => {
             this.setState({
