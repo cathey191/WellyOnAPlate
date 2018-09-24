@@ -57,6 +57,9 @@ export class MapContainer extends Component {
               onClick={this.onMarkerClick}
               name={marker.title}
               description={marker.description}
+              address={marker.address}
+              hours={marker.hours}
+              suburb={marker.suburb}
               position={{ lat: marker.lat, lng: marker.lng }}
               />
               ))}
@@ -65,7 +68,9 @@ export class MapContainer extends Component {
               visible={this.state.showingInfoWindow}>
               <div className='infoBox'>
                 <h1>{this.state.selectedPlace.name}</h1>
-                <p>{this.state.selectedPlace.description}</p>
+                <h2 className='item-name green-text' id='sizing'>{this.state.selectedPlace.hours}</h2>
+                <p className='item-address'>{this.state.selectedPlace.address}</p>
+                <p className='item-address'>{this.state.selectedPlace.suburb}</p>
               </div>
               </InfoWindow>
             </Map>
@@ -105,7 +110,8 @@ export class MapContainer extends Component {
 
           locations.push({
             title: el[i][0].company,
-            address: el[i][0].address,
+            address: el[i][0].address1,
+            hours: el[i][0].hours,
             suburb: el[i][0].suburb,
             description: el[i][1][0].description,
             lat: lat,
