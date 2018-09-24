@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 import key from './config.json'
 import Geocode from 'react-geocode'
 
 Geocode.setApiKey(key[0].API_KEY)
-// Geocode.enableDebug()
 
 export class MapContainer extends Component {
   constructor (props) {
@@ -12,28 +11,44 @@ export class MapContainer extends Component {
     this.state = {
       itemsFromProps: this.props.items,
       locationArray: [],
+<<<<<<< HEAD
       text: 'text',
       isLoaded: false,
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {}
+=======
+      current: 'burger',
+      isLoaded: false
+>>>>>>> 17a2744c8ae8ee2a10e55b4333ed5e23f74184ab
     }
     this.getLocations = this.getLocations.bind(this)
     this.onMarkerClick = this.onMarkerClick.bind(this)
     this.onMapClicked = this.onMapClicked.bind(this)
   }
 
+<<<<<<< HEAD
   componentDidMount () {
+=======
+  componentWillMount () {
+>>>>>>> 17a2744c8ae8ee2a10e55b4333ed5e23f74184ab
     this.getLocations()
-    
   }
-  
-  componentDidUpdate(){
-    
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.currentState !== this.state.current) {
+      this.getLocations()
+      this.setState({
+        current: this.props.current
+      })
+    }
   }
   
   render () {
+<<<<<<< HEAD
     console.log(this.state.locationArray);
+=======
+>>>>>>> 17a2744c8ae8ee2a10e55b4333ed5e23f74184ab
     const { isLoaded, locationArray } = this.state
     if (!isLoaded) {
       return <div>Loading...</div>
@@ -72,6 +87,7 @@ export class MapContainer extends Component {
     }
   }
 
+<<<<<<< HEAD
   onMarkerClick(props, marker, e){
     console.log(e);
     console.log(props);
@@ -100,6 +116,13 @@ export class MapContainer extends Component {
       var el = this.props.items
       
 
+=======
+  getLocations () {
+    var locations = []
+    var count = 0
+    for (let i = 0; i < 15; i++) {
+      var el = this.props.items[i]
+>>>>>>> 17a2744c8ae8ee2a10e55b4333ed5e23f74184ab
 
       Geocode.fromAddress(el[i]['0'].address1 + ' Wellington, New Zealand').then(
         response => {
@@ -121,8 +144,12 @@ export class MapContainer extends Component {
             lng: lng
           })
 
+<<<<<<< HEAD
 
           if (count === 5) {
+=======
+          if (count === 15) {
+>>>>>>> 17a2744c8ae8ee2a10e55b4333ed5e23f74184ab
             this.setState({
               locationArray: locations,
               isLoaded: true
