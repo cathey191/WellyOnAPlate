@@ -13,13 +13,16 @@ export class MapContainer extends Component {
       itemsFromProps: this.props.items,
       locationArray: [],
       text: 'text',
-      isLoaded: false
+      isLoaded: false,
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {}
     }
     this.getLocations = this.getLocations.bind(this)
+    this.onMarkerClick = this.onMarkerClick.bind(this)
   }
 
   componentDidMount () {
-    console.log(this.props.items.length);
     this.getLocations()
     
   }
@@ -27,11 +30,9 @@ export class MapContainer extends Component {
   componentDidUpdate(){
     
   }
-
+  
   render () {
-    console.log(this.props.items)
-
-    console.log(this.state.locationArray)
+    console.log(this.state.locationArray);
     const { isLoaded, locationArray } = this.state
     if (!isLoaded) {
       return <div>Loading...</div>
@@ -49,8 +50,9 @@ export class MapContainer extends Component {
           >
             {locationArray.map((marker, i) => (
               <Marker
-                key={i}
-                name={'Name'}
+              key={i}
+              onClick={this.onMarkerClick}
+                name={marker.title}
                 position={{ lat: marker.lat, lng: marker.lng }}
               />
             ))}
@@ -59,13 +61,17 @@ export class MapContainer extends Component {
       )
     }
   }
+  onMarkerClick(props, marker, e){
+    console.log(e);
+    console.log(props);
+    console.log(marker);
+    
+  }
 
   getLocations () {
-    console.log('running')
-
     var locations = []
     var count = 0
-    for (let i = 0; i < this.props.items.length; i++) {
+    for (let i = 0; i < 5; i++) {
       var el = this.props.items[i]
       // console.log(el);
 
@@ -77,11 +83,13 @@ export class MapContainer extends Component {
 
           locations.push({
             title: el[0].company,
+            address: el[0].address1,
+            suburb: el[0].suburb,
             lat: lat,
             lng: lng
           })
 
-          if (count === this.props.items.length) {
+          if (count === 5) {
             this.setState({
               locationArray: locations,
               isLoaded: true
