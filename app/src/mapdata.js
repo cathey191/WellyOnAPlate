@@ -20,7 +20,6 @@ export class MapContainer extends Component {
 
   componentDidMount(){
     this.getLocations()
-    console.log(this.locationArray);
     
     
     
@@ -28,6 +27,7 @@ export class MapContainer extends Component {
   }
 
   render() {
+    console.log(this.state.locationArray);
     
     return(
       <div>
@@ -67,14 +67,16 @@ export class MapContainer extends Component {
                 // var lng = response.results[0].geometry.location.lng
                 
                 var test = response.results[0].geometry.location
+                // console.log(this.state.locationArray);
+                
                 // console.log(test);
-                var joined = this.state.locationArray.concat(test)
+                var joined = this.state.locationArray.concat({test})
                 // console.log(joined);
                 // locations.push(test)
-                this.setState({
-                  locationArray: joined
-                })
                 if (i + 1 === 10){
+                  this.setState({
+                    locationArray: joined
+                  })
                 }
               },
               error => {
@@ -84,6 +86,7 @@ export class MapContainer extends Component {
                 
             )
           }
+          
           
           
         }
