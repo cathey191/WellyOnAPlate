@@ -11,14 +11,23 @@ export class MapContainer extends Component {
     this.state = {
       itemsFromProps: this.props.items,
       locationArray: [],
-      text: 'text',
+      current: 'burger',
       isLoaded: false
     }
     this.getLocations = this.getLocations.bind(this)
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.getLocations()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.currentState !== this.state.current) {
+      this.getLocations()
+      this.setState({
+        current: this.props.current
+      })
+    }
   }
 
   render () {
