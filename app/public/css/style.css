@@ -24,6 +24,9 @@ h3 {
 p {
   font-weight: 300; }
 
+.green-text {
+  color: #1dbc97; }
+
 .venue-address {
   font-size: 14px; }
 
@@ -129,9 +132,6 @@ main {
 
 .item:first-of-type {
   padding-top: 20px; }
-
-.list-bottom {
-  margin-top: 15px; }
 
 .list-bottom::after {
   content: "";

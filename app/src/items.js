@@ -10,9 +10,15 @@ class Items extends Component {
   }
 
   render () {
+    var icon
+    if (this.props.items[0][1][0].event === 'burger') {
+      icon = './icons/hamburger-meal.png'
+    } else if (this.props.items[0][1][0].event === 'cocktail') {
+      icon = './icons/cocktail.png'
+    }
     if (
-      this.props.allItems[0][1][0].event === 'burger' ||
-      this.props.allItems[0][1][0].event === 'cocktail'
+      this.props.items[0][1][0].event === 'burger' ||
+      this.props.items[0][1][0].event === 'cocktail'
     ) {
       return (
         <div>
@@ -25,13 +31,16 @@ class Items extends Component {
                 </h1>
                 <h2 className='item-name'>
                   <img
-                    src='./icons/hamburger-meal.png'
+                    src={icon}
                     alt=''
                     className='icon-small'
                   />
                   {item[1][0].title}
                 </h2>
                 <p>{item[1][0].description}</p>
+                <br />
+                <h2 className='item-name green-text'>{item[0].hours}</h2>
+                <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                 <div className='list-bottom'>
                   <a href={'http://' + item[0].website}>
@@ -73,6 +82,9 @@ class Items extends Component {
                       {item[1][0].dishes[2].course3_type}
                     </h2>
                     <p>{item[1][0].dishes[2].course3}</p>
+                    <br />
+                    <h2 className='item-name green-text'>{item[0].hours}</h2>
+                    <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                     <div className='list-bottom'>
                       <a href={'http://' + item[0].website}>
@@ -104,6 +116,9 @@ class Items extends Component {
                       {item[1][0].dishes[1].course2_type}
                     </h2>
                     <p>{item[1][0].dishes[1].course2}</p>
+                    <br />
+                    <h2 className='item-name green-text'>{item[0].hours}</h2>
+                    <p className='item-address'>{item[0].address1}<br />{item[0].suburb}</p>
 
                     <div className='list-bottom'>
                       <a href={'http://' + item[0].website}>

@@ -111,7 +111,13 @@ app.get('/cocktail/type:type', function (req, res) {
 function eventData (woapLocations) {
   var location = []
   if (woapLocations.Event.length !== 0) {
-    location.push({ company: woapLocations.Venue.title, address1: woapLocations.Venue.address1, suburb: woapLocations.Venue.suburb, website: woapLocations.Venue.website })
+    location.push({
+      company: woapLocations.Venue.title,
+      address1: woapLocations.Venue.address1,
+      suburb: woapLocations.Venue.suburb,
+      website: woapLocations.Venue.website,
+      hours: getHours(woapLocations)
+    })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
       if (woapLocations.Event[j].platform_burger === '1') {
@@ -134,7 +140,13 @@ function eventData (woapLocations) {
 function getDine (woapLocations) {
   var location = []
   if (woapLocations.Event.length !== 0) {
-    location.push({ company: woapLocations.Venue.title, address1: woapLocations.Venue.address1, suburb: woapLocations.Venue.suburb, website: woapLocations.Venue.website })
+    location.push({
+      company: woapLocations.Venue.title,
+      address1: woapLocations.Venue.address1,
+      suburb: woapLocations.Venue.suburb,
+      website: woapLocations.Venue.website,
+      hours: getHours(woapLocations)
+    })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
       if (woapLocations.Event[j].platform_dine === '1' && woapLocations.Event[j].how_many_additional_courses_will_you_be_serving.length === 1) {
@@ -151,7 +163,13 @@ function getDine (woapLocations) {
 function getBurger (woapLocations) {
   var location = []
   if (woapLocations.Event.length !== 0) {
-    location.push({ company: woapLocations.Venue.title, address1: woapLocations.Venue.address1, suburb: woapLocations.Venue.suburb, website: woapLocations.Venue.website })
+    location.push({
+      company: woapLocations.Venue.title,
+      address1: woapLocations.Venue.address1,
+      suburb: woapLocations.Venue.suburb,
+      website: woapLocations.Venue.website,
+      hours: getHours(woapLocations)
+    })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
       if (woapLocations.Event[j].platform_burger === '1') {
@@ -168,7 +186,13 @@ function getBurger (woapLocations) {
 function getCocktail (woapLocations) {
   var location = []
   if (woapLocations.Event.length !== 0) {
-    location.push({ company: woapLocations.Venue.title, address1: woapLocations.Venue.address1, suburb: woapLocations.Venue.suburb, website: woapLocations.Venue.website })
+    location.push({
+      company: woapLocations.Venue.title,
+      address1: woapLocations.Venue.address1,
+      suburb: woapLocations.Venue.suburb,
+      website: woapLocations.Venue.website,
+      hours: getHours(woapLocations)
+    })
     for (var j = 0; j < woapLocations.Event.length; j++) {
       var option = []
       if (woapLocations.Event[j].platform_cocktail === '1') {
@@ -194,6 +218,26 @@ function dineData (data) {
     dine.push({ course3_type: data.course3_option1_type, course3: data.course3_option1 })
   }
   return dine
+}
+
+function getHours (data) {
+  var d = new Date()
+  var weekday = new Array(7)
+  weekday[0] = 'open_hours__sun'
+  weekday[1] = 'open_hours__mon'
+  weekday[2] = 'open_hours__tue'
+  weekday[3] = 'open_hours__wed'
+  weekday[4] = 'open_hours__thu'
+  weekday[5] = 'open_hours__fri'
+  weekday[6] = 'open_hours__sat'
+
+  var hours = data.Venue[weekday[d.getDay()]]
+
+  if (hours === '' || hours === 'n/a') {
+    hours = 'Hours are unavailable'
+  }
+
+  return hours
 }
 
 function removeFalse (array) {
