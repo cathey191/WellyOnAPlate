@@ -52,20 +52,39 @@ export class MapContainer extends Component {
               <Marker
               key={i}
               onClick={this.onMarkerClick}
-                name={marker.title}
-                position={{ lat: marker.lat, lng: marker.lng }}
+              name={marker.title}
+              position={{ lat: marker.lat, lng: marker.lng }}
               />
-            ))}
-          </Map>
+              ))}
+              <InfoWindow>
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}><div><h1>{this.state.selectedPlace.name}</h1></div>
+              </InfoWindow>
+            </Map>
         </div>
       )
     }
   }
+
   onMarkerClick(props, marker, e){
     console.log(e);
     console.log(props);
     console.log(marker);
+    // this.setState({
+    //   selectedPlace: props,
+    //   activeMarker: marker,
+    //   showingInfoWindow: true
+    // })
     
+  }
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
   }
 
   getLocations () {
