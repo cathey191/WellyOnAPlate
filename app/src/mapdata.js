@@ -25,7 +25,7 @@ export class MapContainer extends Component {
     if (nextProps.currentState !== this.state.current) {
       this.getLocations()
       this.setState({
-        current: this.props.current
+        current: nextProps.currentState
       })
     }
   }
@@ -62,7 +62,7 @@ export class MapContainer extends Component {
   getLocations () {
     var locations = []
     var count = 0
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < this.props.items.length; i++) {
       var el = this.props.items[i]
 
       Geocode.fromAddress(el['0'].address1 + ' Wellington, New Zealand').then(
@@ -77,7 +77,7 @@ export class MapContainer extends Component {
             lng: lng
           })
 
-          if (count === 15) {
+          if (count === this.props.items.length) {
             this.setState({
               locationArray: locations,
               isLoaded: true
