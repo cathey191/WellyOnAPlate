@@ -54,12 +54,17 @@ export class MapContainer extends Component {
               key={i}
               onClick={this.onMarkerClick}
               name={marker.title}
+              description={marker.description}
               position={{ lat: marker.lat, lng: marker.lng }}
               />
               ))}
               <InfoWindow
               marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}><div><h1>{this.state.selectedPlace.name}</h1></div>
+              visible={this.state.showingInfoWindow}>
+              <div className='infoBox'>
+                <h1>{this.state.selectedPlace.name}</h1>
+                <p>{this.state.selectedPlace.description}</p>
+              </div>
               </InfoWindow>
             </Map>
         </div>
@@ -92,22 +97,30 @@ export class MapContainer extends Component {
     var locations = []
     var count = 0
     for (let i = 0; i < 5; i++) {
-      var el = this.props.items[i]
-      // console.log(el);
+      var el = this.props.items
+      
 
-      Geocode.fromAddress(el['0'].address1 + ' Wellington, New Zealand').then(
+
+      Geocode.fromAddress(el[i]['0'].address1 + ' Wellington, New Zealand').then(
         response => {
           count++
           var lat = response.results[0].geometry.location.lat
           var lng = response.results[0].geometry.location.lng
+          // console.log(el);
+          console.log(i);
+          console.log(el[i]);
+          
+                    
 
           locations.push({
-            title: el[0].company,
-            address: el[0].address1,
-            suburb: el[0].suburb,
+            title: el[i][0].company,
+            address: el[i][0].address,
+            suburb: el[i][0].suburb,
+            description: el[i][1][0].description,
             lat: lat,
             lng: lng
           })
+
 
           if (count === 5) {
             this.setState({
