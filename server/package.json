@@ -16,7 +16,7 @@
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "googleapis": "^33.0.0"
+    "googleapis": "^59.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
